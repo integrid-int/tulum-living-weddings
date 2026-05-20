@@ -57,3 +57,32 @@ The app exposes `POST /api/revalidate` for on-demand cache invalidation after co
    - Key: `x-sanity-webhook-secret`
    - Value: the same secret as `SANITY_REVALIDATE_WEBHOOK_SECRET`
 5. Save webhook and publish a Sanity content change to verify the route returns `200` with an `ok: true` response.
+
+## Manual Instagram import (operator guide)
+
+Use `scripts/import-instagram-manual.mjs` to normalize exported Instagram rows into gallery-item payloads.
+
+### Input format
+
+- Supported input files: `.csv` or `.json` array.
+- Preferred columns/fields:
+  - `title` (optional; falls back to `caption` or `headline`)
+  - `category` (mapped to normalized gallery category values)
+  - `permalink` (stored as `instagramPermalink`)
+  - `sortOrder` (optional; defaults to `0`)
+
+### Dry-run first
+
+```bash
+node scripts/import-instagram-manual.mjs --input ./data/instagram.csv --dry-run
+```
+
+This prints a row count and a preview of normalized gallery payload objects without writing files.
+
+### Generate import payload
+
+```bash
+node scripts/import-instagram-manual.mjs --input ./data/instagram.csv --output ./data/gallery-import.json
+```
+
+If `--output` is omitted, the script writes `<input>.gallery-import.json`.
