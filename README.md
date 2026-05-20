@@ -22,7 +22,10 @@
 - `CONTACT_NOTIFICATION_TO`: Destination email for contact form alerts.
 - `CONTACT_FROM_EMAIL`: Sender email used in contact notifications.
 - `CONTACT_EMAIL_WEBHOOK_URL`: Webhook endpoint for your email delivery provider.
-- `CONTACT_EMAIL_WEBHOOK_TOKEN`: Optional bearer token for the email webhook.
+
+### Optional variables
+
+- `CONTACT_EMAIL_WEBHOOK_TOKEN`: Optional bearer token for the contact email webhook.
 
 ## Secure Sanity webhook revalidation
 
