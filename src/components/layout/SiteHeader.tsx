@@ -75,7 +75,8 @@ export default function SiteHeader({
                 style={{
                   color: "var(--brand-cocoa)",
                   textDecoration: "none",
-                  fontWeight: 600
+                  fontWeight: 600,
+                  transition: "color 180ms ease"
                 }}
               >
                 {link.label}
@@ -92,7 +93,8 @@ export default function SiteHeader({
             backgroundColor: "var(--brand-primary)",
             borderRadius: "999px",
             padding: "0.45rem 0.85rem",
-            fontSize: "0.92rem"
+            fontSize: "0.92rem",
+            transition: "transform 180ms ease, box-shadow 180ms ease"
           }}
         >
           Book consultation

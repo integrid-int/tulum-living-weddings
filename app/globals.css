@@ -25,6 +25,7 @@ body {
     radial-gradient(circle at 85% 0%, rgba(195, 77, 95, 0.18), transparent 35%),
     linear-gradient(180deg, var(--brand-cream) 0%, var(--brand-white) 430px);
   line-height: 1.5;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -37,4 +38,34 @@ h3 {
   text-wrap: balance;
   font-family: var(--font-display), Georgia, serif;
   letter-spacing: 0.01em;
+}
+
+.editorial-fade-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes editorialFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .editorial-fade-up {
+    animation: editorialFadeUp 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .editorial-fade-up-delay {
+    animation-delay: 120ms;
+  }
+
+  .editorial-fade-up-delay-2 {
+    animation-delay: 220ms;
+  }
 }

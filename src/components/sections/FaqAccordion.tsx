@@ -28,7 +28,7 @@ export default function FaqAccordion({
   items = defaultFaqItems
 }: FaqAccordionProps) {
   return (
-    <section style={{ padding: "0 1.5rem 2.25rem" }}>
+    <section className="editorial-fade-up" style={{ padding: "0 1.5rem 2.25rem" }}>
       <div style={{ margin: "0 auto", maxWidth: "70rem", display: "grid", gap: "1rem" }}>
       <h2 style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>{heading}</h2>
       <div style={{ display: "grid", gap: "0.75rem" }}>

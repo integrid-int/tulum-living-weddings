@@ -22,6 +22,7 @@ export default function TrustSignals({
   return (
     <section
       data-testid="trust-signals"
+      className="editorial-fade-up"
       style={{
         margin: "-1.75rem auto 0",
         padding: "0 1.5rem 2rem",

@@ -1,5 +1,6 @@
 import { cache } from "react";
 import type { Metadata } from "next";
+import AsSeenInStrip from "@/src/components/sections/AsSeenInStrip";
 import FeatureGrid from "@/src/components/sections/FeatureGrid";
 import Hero from "@/src/components/sections/Hero";
 import PlanningProcess from "@/src/components/sections/PlanningProcess";
@@ -97,6 +98,8 @@ export default async function HomePage() {
         description={resolveMarketingCopy(page?.heroSubtitle, FALLBACK_CONTENT.description)}
         ctaLabel={page?.primaryCta?.label?.trim() || FALLBACK_CONTENT.ctaLabel}
         ctaHref={page?.primaryCta?.href?.trim() || FALLBACK_CONTENT.ctaHref}
+        secondaryCtaLabel="Explore galleries"
+        secondaryCtaHref="/gallery"
         backgroundImageUrl={
           (page?.heroImage ? buildSanityImageUrl(page.heroImage, { width: 1800, height: 1100, fit: "crop" }) : null) ??
           BRAND_IMAGE_SOURCES.homeHero
@@ -110,6 +113,7 @@ export default async function HomePage() {
           { value: "4.9/5", label: "average couple satisfaction" }
         ]}
       />
+      <AsSeenInStrip />
       <FeatureGrid heading="Signature planning experiences" features={featureItems.length > 0 ? featureItems : undefined} />
       <PlanningProcess />
       <TestimonialsGrid

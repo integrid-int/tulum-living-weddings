@@ -6,6 +6,8 @@ type HeroProps = {
   description: string;
   ctaLabel?: string;
   ctaHref?: string;
+  secondaryCtaLabel?: string;
+  secondaryCtaHref?: string;
   backgroundImageUrl?: string;
 };
 
@@ -15,10 +17,13 @@ export default function Hero({
   description,
   ctaLabel,
   ctaHref,
+  secondaryCtaLabel,
+  secondaryCtaHref,
   backgroundImageUrl
 }: HeroProps) {
   return (
     <section
+      className="editorial-fade-up"
       style={{
         padding: "3.5rem 1.5rem 4.5rem",
         backgroundColor: "var(--brand-sand)",
@@ -27,10 +32,25 @@ export default function Hero({
           : "linear-gradient(120deg, rgba(195, 77, 95, 0.16), rgba(248, 186, 80, 0.24))",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        color: "var(--brand-white)"
+        color: "var(--brand-white)",
+        minHeight: "clamp(26rem, 58vh, 38rem)",
+        display: "grid",
+        alignContent: "end"
       }}
     >
-      <div style={{ margin: "0 auto", maxWidth: "70rem", display: "grid", gap: "1rem" }}>
+      <div
+        style={{
+          margin: "0 auto",
+          maxWidth: "70rem",
+          display: "grid",
+          gap: "1rem",
+          borderRadius: "1rem",
+          padding: "1rem",
+          backgroundColor: "rgba(0, 0, 0, 0.12)",
+          border: "1px solid rgba(255, 255, 255, 0.18)",
+          backdropFilter: "blur(2px)"
+        }}
+      >
         {eyebrow ? (
           <p style={{ margin: 0, color: "var(--brand-accent)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>
             {eyebrow}
@@ -51,7 +71,7 @@ export default function Hero({
           {description}
         </p>
         {ctaLabel && ctaHref ? (
-          <div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem" }}>
             <Link
               href={ctaHref}
               style={{
@@ -67,6 +87,23 @@ export default function Hero({
             >
               {ctaLabel}
             </Link>
+            {secondaryCtaLabel && secondaryCtaHref ? (
+              <Link
+                href={secondaryCtaHref}
+                style={{
+                  display: "inline-block",
+                  color: "var(--brand-white)",
+                  textDecoration: "none",
+                  borderRadius: "0.6rem",
+                  padding: "0.72rem 1.15rem",
+                  fontWeight: 700,
+                  border: "1px solid rgba(255, 255, 255, 0.7)",
+                  backgroundColor: "rgba(255, 255, 255, 0.1)"
+                }}
+              >
+                {secondaryCtaLabel}
+              </Link>
+            ) : null}
           </div>
         ) : null}
       </div>
