@@ -3,6 +3,14 @@ export type StudioAuthConfig = {
   password: string;
 };
 
+function getRuntimeEnv(): Record<string, string | undefined> {
+  if (typeof process === "undefined" || !process.env) {
+    return {};
+  }
+
+  return process.env;
+}
+
 function decodeBase64(input: string): string | null {
   try {
     if (typeof atob === "function") {
@@ -45,7 +53,7 @@ export function parseBasicAuthorizationHeader(headerValue: string | null): Studi
   };
 }
 
-export function getStudioAuthConfig(env: Record<string, string | undefined> = process.env): StudioAuthConfig | null {
+export function getStudioAuthConfig(env: Record<string, string | undefined> = getRuntimeEnv()): StudioAuthConfig | null {
   const username = env.STUDIO_BASIC_AUTH_USER?.trim();
   const password = env.STUDIO_BASIC_AUTH_PASSWORD?.trim();
 
@@ -57,7 +65,7 @@ export function getStudioAuthConfig(env: Record<string, string | undefined> = pr
 }
 
 export function shouldEnforceStudioAuth(
-  nodeEnv: string | undefined = process.env.NODE_ENV,
+  nodeEnv: string | undefined = getRuntimeEnv().NODE_ENV,
   authConfig: StudioAuthConfig | null = getStudioAuthConfig()
 ): boolean {
   if (authConfig) {

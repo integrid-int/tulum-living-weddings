@@ -17,7 +17,7 @@ function unauthorizedResponse() {
   });
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const authConfig = getStudioAuthConfig();
   if (!shouldEnforceStudioAuth(process.env.NODE_ENV, authConfig)) {
     return NextResponse.next();
@@ -36,5 +36,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/studio/:path*"]
+  matcher: ["/studio", "/studio/:path*"]
 };
