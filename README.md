@@ -40,6 +40,10 @@ Before tagging a release, run this verification sequence from the repository roo
 
 ## Environment setup
 
+If you want a Vercel-importable env file, use:
+
+- `vercel.env.import` (key/value format ready for Vercel "Import .env" flow)
+
 1. Copy `.env.example` to `.env.local`.
 2. Fill in all values with your project-specific credentials/secrets.
 3. Keep `.env.local` private and never commit it.
