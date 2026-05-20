@@ -5,8 +5,8 @@ import SiteHeader from "@/src/components/layout/SiteHeader";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Acme Service Co.",
-  description: "Baseline marketing site routes"
+  title: "Tulum Living Weddings",
+  description: "Destination wedding planning services in Tulum and the Riviera Maya"
 };
 
 type RootLayoutProps = {

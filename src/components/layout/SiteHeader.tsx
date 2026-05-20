@@ -22,11 +22,12 @@ const defaultLinks: NavLink[] = [
 ];
 
 export default function SiteHeader({
-  title = "Acme Service Co.",
+  title = "Tulum Living Weddings",
   links = defaultLinks
 }: SiteHeaderProps) {
   return (
     <header
+      data-testid="site-header"
       style={{
         borderBottom: "1px solid #e5e7eb",
         padding: "1rem 1.5rem",

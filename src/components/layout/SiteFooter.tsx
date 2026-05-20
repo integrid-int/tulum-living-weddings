@@ -4,9 +4,10 @@ type SiteFooterProps = {
   companyName?: string;
 };
 
-export default function SiteFooter({ companyName = "Acme Service Co." }: SiteFooterProps) {
+export default function SiteFooter({ companyName = "Tulum Living Weddings" }: SiteFooterProps) {
   return (
     <footer
+      data-testid="site-footer"
       style={{
         borderTop: "1px solid #e5e7eb",
         padding: "1.5rem",
@@ -19,11 +20,11 @@ export default function SiteFooter({ companyName = "Acme Service Co." }: SiteFoo
         © {new Date().getFullYear()} {companyName}
       </p>
       <p style={{ margin: 0 }}>
-        Built with baseline placeholder content until Sanity content is seeded.
+        Crafting unforgettable destination celebrations in Tulum and the Riviera Maya.
       </p>
       <p style={{ margin: 0 }}>
         <Link href="/contact" style={{ color: "#2563eb" }}>
-          Contact our team
+          Start planning your wedding
         </Link>
       </p>
     </footer>
