@@ -19,7 +19,7 @@ function unauthorizedResponse() {
 
 export function proxy(request: NextRequest) {
   const authConfig = getStudioAuthConfig();
-  if (!shouldEnforceStudioAuth(process.env.NODE_ENV, authConfig)) {
+  if (!shouldEnforceStudioAuth(undefined, authConfig)) {
     return NextResponse.next();
   }
 
