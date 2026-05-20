@@ -1,3 +1,5 @@
+import { createImageUrlBuilder } from "@sanity/image-url";
+
 import { readSanityEnv } from "@/sanity/env";
 
 export type SanityImageAssetReference = {
@@ -16,6 +18,8 @@ export type SanityImageWithAlt = {
   alt?: string | null;
 };
 
+export type SanityImageSource = SanityImageWithAlt | SanityImageField | null | undefined;
+
 export type SanityImageUrlOptions = {
   width?: number;
   height?: number;
@@ -23,56 +27,62 @@ export type SanityImageUrlOptions = {
   autoFormat?: boolean;
 };
 
-function parseAssetRef(assetRef: string): { assetId: string; dimensions: string; format: string } | null {
-  const [assetType, assetId, dimensions, format] = assetRef.split("-");
-
-  if (assetType !== "image" || !assetId || !dimensions || !format) {
+function resolveSanityImageSource(source: SanityImageSource): SanityImageField | null {
+  if (!source) {
     return null;
   }
 
-  return { assetId, dimensions, format };
-}
-
-export function getSanityImageAssetRef(image: SanityImageWithAlt | null | undefined): string | null {
-  return image?.image?.asset?._ref ?? null;
-}
-
-export function buildSanityImageUrl(
-  image: SanityImageWithAlt | null | undefined,
-  options: SanityImageUrlOptions = {}
-): string | null {
-  const assetRef = getSanityImageAssetRef(image);
-
-  if (!assetRef) {
-    return null;
+  if ("image" in source) {
+    return source.image ?? null;
   }
 
-  const parsedAsset = parseAssetRef(assetRef);
+  return source;
+}
 
-  if (!parsedAsset) {
+export function getSanityImageAssetRef(source: SanityImageSource): string | null {
+  return resolveSanityImageSource(source)?.asset?._ref ?? null;
+}
+
+export function getSanityImageBuilder(source: SanityImageSource) {
+  const imageSource = resolveSanityImageSource(source);
+
+  if (!imageSource?.asset?._ref) {
     return null;
   }
 
   const env = readSanityEnv();
-  const url = new URL(
-    `https://cdn.sanity.io/images/${env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${env.NEXT_PUBLIC_SANITY_DATASET}/${parsedAsset.assetId}-${parsedAsset.dimensions}.${parsedAsset.format}`
-  );
+
+  return createImageUrlBuilder({
+    projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    dataset: env.NEXT_PUBLIC_SANITY_DATASET
+  }).image(imageSource);
+}
+
+export function buildSanityImageUrl(
+  source: SanityImageSource,
+  options: SanityImageUrlOptions = {}
+): string | null {
+  let builder = getSanityImageBuilder(source);
+
+  if (!builder) {
+    return null;
+  }
 
   if (options.width !== undefined) {
-    url.searchParams.set("w", String(options.width));
+    builder = builder.width(options.width);
   }
 
   if (options.height !== undefined) {
-    url.searchParams.set("h", String(options.height));
+    builder = builder.height(options.height);
   }
 
   if (options.fit) {
-    url.searchParams.set("fit", options.fit);
+    builder = builder.fit(options.fit);
   }
 
   if (options.autoFormat ?? true) {
-    url.searchParams.set("auto", "format");
+    builder = builder.auto("format");
   }
 
-  return url.toString();
+  return builder.url();
 }

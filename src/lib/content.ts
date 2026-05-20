@@ -35,7 +35,7 @@ export type SanityGalleryItemDocument = {
   _id: string;
   title: string;
   category: string;
-  images: SanityImageWithAlt[];
+  images?: SanityImageWithAlt[] | null;
   instagramPermalink?: string | null;
   source: "manual" | "instagram";
   isFeatured?: boolean | null;
@@ -58,7 +58,7 @@ export function mapGalleryItems(items: SanityGalleryItemDocument[]): GalleryItem
     id: item._id,
     title: item.title,
     category: item.category,
-    images: item.images,
+    images: item.images ?? [],
     instagramPermalink: item.instagramPermalink ?? null,
     source: item.source,
     isFeatured: item.isFeatured ?? false,
@@ -115,7 +115,7 @@ export type SanityPricingPackageDocument = {
   packageName: string;
   summary?: string | null;
   priceLabel: string;
-  inclusions: string[];
+  inclusions?: string[] | null;
   addOns?: string[] | null;
   cta?: SanityCta | null;
   isFeatured?: boolean | null;
@@ -140,7 +140,7 @@ export function mapPricingPackages(items: SanityPricingPackageDocument[]): Prici
     packageName: item.packageName,
     summary: item.summary ?? null,
     priceLabel: item.priceLabel,
-    inclusions: item.inclusions,
+    inclusions: item.inclusions ?? [],
     addOns: item.addOns ?? [],
     cta: item.cta ?? null,
     isFeatured: item.isFeatured ?? false,
