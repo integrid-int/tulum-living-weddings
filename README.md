@@ -86,3 +86,5 @@ node scripts/import-instagram-manual.mjs --input ./data/instagram.csv --output .
 ```
 
 If `--output` is omitted, the script writes `<input>.gallery-import.json`.
+
+> The generated payload is metadata only (`title`, `category`, permalink/source flags, etc.). You still need to upload/link image assets manually in Sanity and attach them to each `galleryItem`.

@@ -3,6 +3,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { extname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import { parse as parseCsv } from "csv-parse/sync";
 
 const CATEGORY_ALIASES = new Map([
   ["beach ceremony", "ceremony"],
@@ -83,55 +84,19 @@ export function normalizeInstagramRow(row) {
   };
 }
 
-function parseCsvLine(line) {
-  const fields = [];
-  let current = "";
-  let inQuotes = false;
+export function parseInstagramCsv(content) {
+  const parsed = parseCsv(content, {
+    columns: true,
+    skip_empty_lines: true,
+    trim: true,
+    bom: true
+  });
 
-  for (let i = 0; i < line.length; i += 1) {
-    const char = line[i];
-
-    if (char === '"') {
-      if (inQuotes && line[i + 1] === '"') {
-        current += '"';
-        i += 1;
-      } else {
-        inQuotes = !inQuotes;
-      }
-      continue;
-    }
-
-    if (char === "," && !inQuotes) {
-      fields.push(current);
-      current = "";
-      continue;
-    }
-
-    current += char;
-  }
-
-  fields.push(current);
-  return fields.map((field) => field.trim());
-}
-
-function parseCsvDocument(content) {
-  const lines = content
-    .split(/\r?\n/u)
-    .map((line) => line.trim())
-    .filter((line) => line.length > 0);
-
-  if (lines.length < 2) {
+  if (!Array.isArray(parsed)) {
     return [];
   }
 
-  const headers = parseCsvLine(lines[0]);
-  return lines.slice(1).map((line) => {
-    const values = parseCsvLine(line);
-    return headers.reduce((accumulator, header, index) => {
-      accumulator[header] = values[index] ?? "";
-      return accumulator;
-    }, {});
-  });
+  return parsed;
 }
 
 function parseRows(content, extension) {
@@ -143,7 +108,7 @@ function parseRows(content, extension) {
     return parsed;
   }
 
-  return parseCsvDocument(content);
+  return parseInstagramCsv(content);
 }
 
 function parseCliArgs(argv) {
