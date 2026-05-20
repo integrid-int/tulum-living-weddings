@@ -9,7 +9,7 @@
 
 Before tagging a release, run this verification sequence from the repository root:
 
-1. Unit + smoke E2E checks:
+1. Unit + integration (Vitest) + smoke E2E checks:
    ```bash
    npm run test:unit && npm run test:e2e -- --project=chromium tests/e2e/smoke.spec.ts
    ```
@@ -17,16 +17,26 @@ Before tagging a release, run this verification sequence from the repository roo
    ```bash
    npm run build
    ```
-3. SEO endpoint validation on a local server:
+3. Contact pipeline verification with a real test lead:
+   - Submit a real test contact lead via the site contact form (do not mock this request).
+   - Verify a `contactSubmission` record is created in Sanity.
+   - Verify the contact notification email is delivered to `CONTACT_NOTIFICATION_TO`.
+4. SEO endpoint validation on a local server:
    ```bash
    npm run start
    ```
    In another terminal:
    ```bash
-   curl -sSf http://127.0.0.1:3000/sitemap.xml
-   curl -sSf http://127.0.0.1:3000/robots.txt
+   CANONICAL_URL="${NEXT_PUBLIC_SITE_URL%/}"
+   curl -sS -D /tmp/release-sitemap.headers -o /tmp/release-sitemap.xml http://127.0.0.1:3000/sitemap.xml
+   curl -sS -D /tmp/release-robots.headers -o /tmp/release-robots.txt http://127.0.0.1:3000/robots.txt
+   rg "^HTTP/.* 200" /tmp/release-sitemap.headers
+   rg "^HTTP/.* 200" /tmp/release-robots.headers
+   rg -F "$CANONICAL_URL/" /tmp/release-sitemap.xml
+   rg -F "Host: $CANONICAL_URL" /tmp/release-robots.txt
+   rg -F "Sitemap: $CANONICAL_URL/sitemap.xml" /tmp/release-robots.txt
    ```
-   Both requests must return HTTP 200 and non-empty content.
+   Both requests must return HTTP 200, and sitemap/robots output must include canonical URL references derived from `NEXT_PUBLIC_SITE_URL`.
 
 ## Environment setup
 
