@@ -42,6 +42,7 @@ export default function GalleryGrid({
         {items.map((item) => (
           <article
             key={item.title}
+            className="luxury-card"
             style={{
               border: "1px solid rgba(175, 158, 133, 0.5)",
               borderRadius: "0.75rem",

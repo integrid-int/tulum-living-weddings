@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Sans, Playfair_Display } from "next/font/google";
 import type { ReactNode } from "react";
+import ConciergeFab from "@/src/components/layout/ConciergeFab";
+import LuxuryRibbon from "@/src/components/layout/LuxuryRibbon";
 import SiteFooter from "@/src/components/layout/SiteFooter";
 import SiteHeader from "@/src/components/layout/SiteHeader";
 import JsonLd from "@/src/components/seo/JsonLd";
@@ -66,10 +68,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body className={`${bodyFont.variable} ${displayFont.variable}`}>
         <JsonLd data={sitewideJsonLd} />
-        <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+        <div className="site-shell" style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+          <LuxuryRibbon />
           <SiteHeader />
           <div style={{ flex: 1 }}>{children}</div>
           <SiteFooter />
+          <ConciergeFab />
         </div>
       </body>
     </html>

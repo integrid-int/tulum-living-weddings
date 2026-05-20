@@ -72,6 +72,7 @@ export default function SiteHeader({
             <li key={link.href}>
               <Link
                 href={link.href}
+                className="luxury-nav-link"
                 style={{
                   color: "var(--brand-cocoa)",
                   textDecoration: "none",
@@ -86,6 +87,7 @@ export default function SiteHeader({
         </ul>
         <Link
           href="/contact"
+          className="luxury-pill-link"
           style={{
             color: "var(--brand-white)",
             textDecoration: "none",

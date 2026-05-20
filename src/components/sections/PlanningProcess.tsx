@@ -45,6 +45,7 @@ export default function PlanningProcess({
           {steps.map((step) => (
             <article
               key={step.title}
+              className="luxury-card"
               style={{
                 backgroundColor: "var(--brand-white)",
                 border: "1px solid rgba(175, 158, 133, 0.5)",

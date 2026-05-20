@@ -46,6 +46,7 @@ export default function TestimonialsGrid({
         {testimonials.map((testimonial) => (
           <figure
             key={testimonial.author}
+            className="luxury-card"
             style={{
               margin: 0,
               border: "1px solid rgba(175, 158, 133, 0.5)",

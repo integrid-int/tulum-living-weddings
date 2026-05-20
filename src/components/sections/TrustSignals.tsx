@@ -51,6 +51,7 @@ export default function TrustSignals({
           {signals.map((signal) => (
             <article
               key={`${signal.value}-${signal.label}`}
+              className="luxury-card"
               style={{
                 borderRadius: "0.85rem",
                 border: "1px solid rgba(175, 158, 133, 0.42)",

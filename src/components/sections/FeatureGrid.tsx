@@ -41,6 +41,7 @@ export default function FeatureGrid({
         {features.map((feature) => (
           <article
             key={feature.title}
+            className="luxury-card"
             style={{
               border: "1px solid rgba(175, 158, 133, 0.5)",
               borderRadius: "0.75rem",

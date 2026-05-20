@@ -50,3 +50,10 @@ test("home page renders editorial as-seen-in strip", async ({ page }) => {
   await expect(asSeenIn).toContainText("Wedding Chicks");
   await expect(asSeenIn).toContainText("WeddingWire");
 });
+
+test("site renders ultra luxury global touches", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(page.getByTestId("luxury-ribbon")).toContainText("Limited 2027 luxury dates now open");
+  await expect(page.getByTestId("concierge-fab")).toContainText("Plan with concierge");
+});
