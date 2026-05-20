@@ -4,3 +4,7 @@ node_modules/
 out/
 coverage/
 *.log
+.env.local
+.env*.local
+test-results/
+tsconfig.tsbuildinfo
