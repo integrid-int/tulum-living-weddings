@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import SiteFooter from "@/src/components/layout/SiteFooter";
 import SiteHeader from "@/src/components/layout/SiteHeader";
 import JsonLd from "@/src/components/seo/JsonLd";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, buildCanonicalUrl, buildSitewideJsonLd } from "@/src/lib/seo";
+import { OPENGRAPH_IMAGE_PATH, SITE_DESCRIPTION, SITE_NAME, SITE_URL, buildCanonicalUrl, buildSitewideJsonLd } from "@/src/lib/seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: buildCanonicalUrl(SITE_URL, "/og-image.jpg"),
+        url: buildCanonicalUrl(SITE_URL, OPENGRAPH_IMAGE_PATH),
         width: 1200,
         height: 630,
         alt: "Tulum Living Weddings oceanfront destination wedding setup"
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
-    images: [buildCanonicalUrl(SITE_URL, "/og-image.jpg")]
+    images: [buildCanonicalUrl(SITE_URL, OPENGRAPH_IMAGE_PATH)]
   },
   robots: {
     index: true,

@@ -1,14 +1,29 @@
 type JsonLdRecord = Record<string, unknown>;
 
 const DEFAULT_SITE_URL = "https://www.tulumlivingweddings.com";
+export const OPENGRAPH_IMAGE_PATH = "/opengraph-image";
 
-function normalizeSiteUrl(siteUrl: string) {
-  const trimmed = siteUrl.trim();
+export function resolveSiteUrl(siteUrl?: string | null) {
+  const trimmed = (siteUrl ?? "").trim();
+  if (!trimmed) {
+    return DEFAULT_SITE_URL;
+  }
+
   const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
-  return withProtocol.replace(/\/+$/, "");
+
+  try {
+    const parsedUrl = new URL(withProtocol);
+    if (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") {
+      return DEFAULT_SITE_URL;
+    }
+
+    return parsedUrl.origin;
+  } catch {
+    return DEFAULT_SITE_URL;
+  }
 }
 
-export const SITE_URL = normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL);
+export const SITE_URL = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 export const SITE_NAME = "Tulum Living Weddings";
 export const SITE_DESCRIPTION =
   "Destination wedding planning and design services for couples celebrating in Tulum and across the Riviera Maya.";
@@ -25,8 +40,8 @@ export const CANONICAL_ROUTES = [
 ] as const;
 
 export function buildCanonicalUrl(siteUrl: string, path: string) {
-  const normalizedSite = siteUrl.replace(/\/+$/, "");
-  const normalizedPath = path.replace(/^\/+/, "");
+  const normalizedSite = resolveSiteUrl(siteUrl);
+  const normalizedPath = path.replace(/^\/+/, "").trim();
 
   if (!normalizedPath) {
     return normalizedSite;
@@ -42,7 +57,7 @@ export function buildLocalBusinessJsonLd(siteUrl = SITE_URL): JsonLdRecord {
     name: SITE_NAME,
     description: SITE_DESCRIPTION,
     url: siteUrl,
-    image: buildCanonicalUrl(siteUrl, "/og-image.jpg"),
+    image: buildCanonicalUrl(siteUrl, OPENGRAPH_IMAGE_PATH),
     areaServed: ["Tulum", "Riviera Maya"],
     contactPoint: [
       {
@@ -62,6 +77,8 @@ export function buildLocalBusinessJsonLd(siteUrl = SITE_URL): JsonLdRecord {
 }
 
 export function buildWebSiteJsonLd(siteUrl = SITE_URL): JsonLdRecord {
+  const faqUrl = buildCanonicalUrl(siteUrl, "/faq");
+
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -70,7 +87,7 @@ export function buildWebSiteJsonLd(siteUrl = SITE_URL): JsonLdRecord {
     inLanguage: "en",
     potentialAction: {
       "@type": "SearchAction",
-      target: `${siteUrl}/faq?q={search_term_string}`,
+      target: `${faqUrl}?q={search_term_string}`,
       "query-input": "required name=search_term_string"
     }
   };
