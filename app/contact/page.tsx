@@ -1,193 +1,82 @@
-"use client";
+import { cache } from "react";
+import type { Metadata } from "next";
+import ContactForm from "@/src/components/contact/ContactForm";
+import { fetchSanitySafe } from "@/sanity/lib/client";
+import { PAGE_CONTACT_QUERY } from "@/sanity/lib/queries";
+import { resolveMarketingCopy } from "@/src/lib/copy";
+import { buildRouteMetadata, type RouteSeoFields } from "@/src/lib/route-metadata";
 
-import { type CSSProperties, type FormEvent, useState } from "react";
-
-type SubmitState =
-  | { type: "idle" }
-  | { type: "submitting" }
-  | { type: "success"; message: string }
-  | { type: "error"; message: string };
-
-const baseInputStyles: CSSProperties = {
-  width: "100%",
-  border: "1px solid #d1d5db",
-  borderRadius: "0.5rem",
-  padding: "0.625rem 0.75rem",
-  font: "inherit"
+type ContactPageDocument = {
+  title?: string | null;
+  intro?: string | null;
+  contactEmail?: string | null;
+  contactPhone?: string | null;
+  submitButtonLabel?: string | null;
+  successMessage?: string | null;
+  seo?: RouteSeoFields | null;
 };
 
-function toOptionalString(value: FormDataEntryValue | null): string | undefined {
-  if (typeof value !== "string") {
-    return undefined;
-  }
+const FALLBACK_CONTENT = {
+  eyebrow: "Contact",
+  title: "Plan your Tulum celebration with local experts",
+  description:
+    "Share your vision, timeline, and guest count, and our planning team will guide your next steps.",
+  email: "hello@tulumlivingweddings.com",
+  phone: "+529841230456",
+  phoneDisplay: "+52 (984) 123-0456",
+  submitButtonLabel: "Submit inquiry",
+  successMessage: "Thanks for reaching out. Our planning team will contact you shortly."
+};
 
-  const trimmed = value.trim();
-  return trimmed.length > 0 ? trimmed : undefined;
+const getContactPageData = cache(async () => fetchSanitySafe<ContactPageDocument | null>(PAGE_CONTACT_QUERY, null));
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getContactPageData();
+
+  return buildRouteMetadata({
+    routePath: "/contact",
+    fallbackTitle: FALLBACK_CONTENT.title,
+    fallbackDescription: FALLBACK_CONTENT.description,
+    seo: page?.seo
+  });
 }
 
-export default function ContactPage() {
-  const [submitState, setSubmitState] = useState<SubmitState>({ type: "idle" });
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSubmitState({ type: "submitting" });
-
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    const guestCountValue = toOptionalString(formData.get("guestCount"));
-
-    const payload = {
-      name: toOptionalString(formData.get("name")) ?? "",
-      email: toOptionalString(formData.get("email")) ?? "",
-      phone: toOptionalString(formData.get("phone")),
-      eventDate: toOptionalString(formData.get("eventDate")),
-      guestCount: guestCountValue ? Number(guestCountValue) : undefined,
-      budgetRange: toOptionalString(formData.get("budgetRange")),
-      eventType: toOptionalString(formData.get("eventType")),
-      message: toOptionalString(formData.get("message")) ?? "",
-      consent: formData.get("consent") === "on",
-      sourcePage: "/contact",
-      website: toOptionalString(formData.get("website")) ?? ""
-    };
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      });
-
-      const body = await response.json().catch(() => null);
-      if (!response.ok || !body?.ok) {
-        const message =
-          typeof body?.message === "string"
-            ? body.message
-            : "We could not send your request. Please try again.";
-        setSubmitState({ type: "error", message });
-        return;
-      }
-
-      form.reset();
-      setSubmitState({
-        type: "success",
-        message: "Thanks for reaching out. Our planning team will contact you shortly."
-      });
-    } catch {
-      setSubmitState({
-        type: "error",
-        message: "Network issue while sending your request. Please try again."
-      });
-    }
-  }
+export default async function ContactPage() {
+  const page = await getContactPageData();
+  const contactEmail = page?.contactEmail?.trim() || FALLBACK_CONTENT.email;
+  const contactPhoneRaw = page?.contactPhone?.trim() || FALLBACK_CONTENT.phoneDisplay;
+  const contactPhoneHref =
+    contactPhoneRaw.startsWith("+") || contactPhoneRaw.startsWith("00")
+      ? contactPhoneRaw.replace(/[^\d+]/g, "")
+      : FALLBACK_CONTENT.phone;
 
   return (
     <main>
       <section style={{ display: "grid", gap: "1rem", padding: "2rem 1.5rem" }}>
-        <p style={{ margin: 0, color: "#2563eb", fontWeight: 600, textTransform: "uppercase" }}>Contact</p>
+        <p style={{ margin: 0, color: "#2563eb", fontWeight: 600, textTransform: "uppercase" }}>{FALLBACK_CONTENT.eyebrow}</p>
         <h1 style={{ margin: 0, fontSize: "2rem", lineHeight: 1.2 }}>
-          Plan your Tulum celebration with local experts
+          {resolveMarketingCopy(page?.title, FALLBACK_CONTENT.title)}
         </h1>
         <p style={{ margin: 0, maxWidth: "48rem", color: "#4b5563" }}>
-          Share your vision, timeline, and guest count, and our planning team will guide your next steps.
+          {resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
         </p>
       </section>
 
       <section style={{ padding: "0 1.5rem 2rem", display: "grid", gap: "1rem", maxWidth: "48rem" }}>
         <h2 style={{ margin: 0 }}>Send us your wedding plans</h2>
-        <form onSubmit={handleSubmit} style={{ display: "grid", gap: "0.75rem" }}>
-          <label style={{ display: "grid", gap: "0.25rem" }}>
-            <span>Name *</span>
-            <input name="name" type="text" required style={baseInputStyles} autoComplete="name" />
-          </label>
-
-          <label style={{ display: "grid", gap: "0.25rem" }}>
-            <span>Email *</span>
-            <input name="email" type="email" required style={baseInputStyles} autoComplete="email" />
-          </label>
-
-          <label style={{ display: "grid", gap: "0.25rem" }}>
-            <span>Phone / WhatsApp</span>
-            <input name="phone" type="tel" style={baseInputStyles} autoComplete="tel" />
-          </label>
-
-          <label style={{ display: "grid", gap: "0.25rem" }}>
-            <span>Event date</span>
-            <input name="eventDate" type="date" style={baseInputStyles} />
-          </label>
-
-          <label style={{ display: "grid", gap: "0.25rem" }}>
-            <span>Estimated guests</span>
-            <input name="guestCount" type="number" min={1} step={1} style={baseInputStyles} />
-          </label>
-
-          <label style={{ display: "grid", gap: "0.25rem" }}>
-            <span>Estimated budget range</span>
-            <input name="budgetRange" type="text" style={baseInputStyles} />
-          </label>
-
-          <label style={{ display: "grid", gap: "0.25rem" }}>
-            <span>Event type</span>
-            <select name="eventType" defaultValue="" style={baseInputStyles}>
-              <option value="">Select an event type</option>
-              <option value="wedding">Wedding</option>
-              <option value="engagement">Engagement</option>
-              <option value="elopement">Elopement</option>
-              <option value="other">Other</option>
-            </select>
-          </label>
-
-          <label style={{ display: "grid", gap: "0.25rem" }}>
-            <span>Message *</span>
-            <textarea name="message" required minLength={20} rows={6} style={baseInputStyles} />
-          </label>
-
-          <input
-            name="website"
-            type="text"
-            tabIndex={-1}
-            autoComplete="off"
-            aria-hidden="true"
-            style={{ position: "absolute", left: "-9999px", opacity: 0 }}
-          />
-
-          <label style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem" }}>
-            <input name="consent" type="checkbox" required style={{ marginTop: "0.25rem" }} />
-            <span>I consent to being contacted by the Tulum Living Weddings team. *</span>
-          </label>
-
-          <button
-            type="submit"
-            disabled={submitState.type === "submitting"}
-            style={{
-              border: 0,
-              borderRadius: "0.5rem",
-              padding: "0.75rem 1rem",
-              backgroundColor: "#111827",
-              color: "#ffffff",
-              font: "inherit",
-              cursor: submitState.type === "submitting" ? "not-allowed" : "pointer"
-            }}
-          >
-            {submitState.type === "submitting" ? "Sending..." : "Submit inquiry"}
-          </button>
-
-          {submitState.type === "success" ? (
-            <p style={{ margin: 0, color: "#065f46" }}>{submitState.message}</p>
-          ) : null}
-
-          {submitState.type === "error" ? <p style={{ margin: 0, color: "#b91c1c" }}>{submitState.message}</p> : null}
-        </form>
+        <ContactForm
+          submitButtonLabel={page?.submitButtonLabel?.trim() || FALLBACK_CONTENT.submitButtonLabel}
+          successMessage={page?.successMessage?.trim() || FALLBACK_CONTENT.successMessage}
+        />
       </section>
 
       <section style={{ padding: "0 1.5rem 2rem", display: "grid", gap: "0.75rem" }}>
         <h2 style={{ margin: 0 }}>Connect with our planning team</h2>
         <p style={{ margin: 0 }}>
-          Email: <a href="mailto:hello@tulumlivingweddings.com">hello@tulumlivingweddings.com</a>
+          Email: <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
         </p>
         <p style={{ margin: 0 }}>
-          Phone: <a href="tel:+529841230456">+52 (984) 123-0456</a>
+          Phone: <a href={`tel:${contactPhoneHref}`}>{contactPhoneRaw}</a>
         </p>
         <p style={{ margin: 0, color: "#4b5563" }}>
           Based in Tulum, Quintana Roo, serving destination weddings across the Riviera Maya.

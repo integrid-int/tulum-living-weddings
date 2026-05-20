@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
 
 test("core routes return successful responses", async ({ page }) => {
-  const routeMarkers: Record<string, string> = {
-    "/": "Launch-ready pages before CMS content is seeded",
+  const routeMarkers: Record<string, string | RegExp> = {
+    "/": /Destination wedding planning rooted in Tulum expertise|Launch-ready pages before CMS content is seeded/,
     "/how-we-can-help": "Structured support from planning to launch",
     "/so-why-us": "Practical execution with predictable delivery",
     "/gallery": "Snapshots of our process",

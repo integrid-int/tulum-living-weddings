@@ -31,6 +31,29 @@ export function mapFaqItems(items: SanityFaqItemDocument[]): FaqItem[] {
   }));
 }
 
+export function portableTextToPlainText(blocks: PortableTextBlock[] | null | undefined): string {
+  if (!Array.isArray(blocks) || blocks.length === 0) {
+    return "";
+  }
+
+  return blocks
+    .map((block) => {
+      const children = Array.isArray(block.children) ? block.children : [];
+      return children
+        .map((child) => {
+          if (typeof child === "object" && child !== null && "text" in child) {
+            return String(child.text ?? "");
+          }
+
+          return "";
+        })
+        .join("")
+        .trim();
+    })
+    .filter(Boolean)
+    .join("\n\n");
+}
+
 export type SanityGalleryItemDocument = {
   _id: string;
   title: string;

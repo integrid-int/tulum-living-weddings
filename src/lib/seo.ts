@@ -1,4 +1,6 @@
 type JsonLdRecord = Record<string, unknown>;
+type FaqJsonLdItem = { question: string; answer: string };
+type PricingJsonLdItem = { packageName: string; summary?: string | null; priceLabel: string };
 
 const DEFAULT_SITE_URL = "https://www.tulumlivingweddings.com";
 export const OPENGRAPH_IMAGE_PATH = "/opengraph-image";
@@ -95,4 +97,43 @@ export function buildWebSiteJsonLd(siteUrl = SITE_URL): JsonLdRecord {
 
 export function buildSitewideJsonLd(siteUrl = SITE_URL): JsonLdRecord[] {
   return [buildLocalBusinessJsonLd(siteUrl), buildWebSiteJsonLd(siteUrl)];
+}
+
+export function buildFaqPageJsonLd(items: FaqJsonLdItem[]): JsonLdRecord {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer
+      }
+    }))
+  };
+}
+
+export function buildPricingServiceJsonLd(items: PricingJsonLdItem[]): JsonLdRecord {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Destination wedding planning packages",
+    provider: {
+      "@type": "LocalBusiness",
+      name: SITE_NAME,
+      url: SITE_URL
+    },
+    areaServed: ["Tulum", "Riviera Maya"],
+    offers: items.map((item) => ({
+      "@type": "Offer",
+      name: item.packageName,
+      description: item.summary ?? undefined,
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        priceCurrency: "USD",
+        price: item.priceLabel
+      }
+    }))
+  };
 }

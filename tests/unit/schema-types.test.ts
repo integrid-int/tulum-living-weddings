@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { schemaTypes } from "@/sanity/schemaTypes";
+import { seoType } from "@/sanity/schemaTypes/objects/seo";
 
 describe("sanity schema registry", () => {
   it("includes all required Task 3 document schemas", () => {
@@ -24,5 +25,15 @@ describe("sanity schema registry", () => {
     for (const requiredName of requiredTask3DocumentNames) {
       expect(names).toContain(requiredName);
     }
+  });
+});
+
+describe("seo object schema", () => {
+  it("supports canonical override and noindex controls", () => {
+    const fields = (seoType as { fields?: Array<{ name?: string }> }).fields ?? [];
+    const fieldNames = fields.map((field) => field.name);
+
+    expect(fieldNames).toContain("canonicalUrl");
+    expect(fieldNames).toContain("noIndex");
   });
 });
