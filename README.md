@@ -5,6 +5,29 @@
 - `npm audit` currently reports `GHSA-qx2v-qp2m-jg93` (PostCSS XSS) through Next.js' bundled dependency chain.
 - At bootstrap time, installed `next@16.2.6` is the latest published version (`npm view next version`), so there is no upstream patched stable Next.js release available to adopt yet.
 
+## Release checklist
+
+Before tagging a release, run this verification sequence from the repository root:
+
+1. Unit + smoke E2E checks:
+   ```bash
+   npm run test:unit && npm run test:e2e -- --project=chromium tests/e2e/smoke.spec.ts
+   ```
+2. Production build:
+   ```bash
+   npm run build
+   ```
+3. SEO endpoint validation on a local server:
+   ```bash
+   npm run start
+   ```
+   In another terminal:
+   ```bash
+   curl -sSf http://127.0.0.1:3000/sitemap.xml
+   curl -sSf http://127.0.0.1:3000/robots.txt
+   ```
+   Both requests must return HTTP 200 and non-empty content.
+
 ## Environment setup
 
 1. Copy `.env.example` to `.env.local`.

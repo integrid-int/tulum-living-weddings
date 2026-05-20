@@ -36,7 +36,11 @@ function resolveSanityImageSource(source: SanityImageSource): SanityImageField |
     return source.image ?? null;
   }
 
-  return source;
+  if ("asset" in source || "crop" in source || "hotspot" in source) {
+    return source;
+  }
+
+  return null;
 }
 
 export function getSanityImageAssetRef(source: SanityImageSource): string | null {
