@@ -10,16 +10,16 @@ type FeatureGridProps = {
 
 const defaultFeatures: Feature[] = [
   {
-    title: "Clear project scoping",
-    description: "We break large goals into practical, easy-to-review milestones."
+    title: "Venue and ceremony planning",
+    description: "Beach clubs, private villas, cenotes, and jungle settings curated for your event style."
   },
   {
-    title: "Fast delivery loops",
-    description: "Small increments let teams validate direction early and often."
+    title: "Design and decor coordination",
+    description: "Florals, furnishings, lighting, and styling details aligned into one visual direction."
   },
   {
-    title: "Reliable handoff",
-    description: "Every baseline route has reusable components ready for CMS wiring."
+    title: "Guest and logistics support",
+    description: "Transfers, welcome experiences, vendor timelines, and event-day flow managed end to end."
   }
 ];
 
@@ -29,7 +29,7 @@ export default function FeatureGrid({
 }: FeatureGridProps) {
   return (
     <section style={{ padding: "0 1.5rem 2rem", display: "grid", gap: "1rem" }}>
-      <h2 style={{ margin: 0 }}>{heading}</h2>
+      <h2 style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>{heading}</h2>
       <div
         style={{
           display: "grid",
@@ -40,10 +40,15 @@ export default function FeatureGrid({
         {features.map((feature) => (
           <article
             key={feature.title}
-            style={{ border: "1px solid #e5e7eb", borderRadius: "0.75rem", padding: "1rem" }}
+            style={{
+              border: "1px solid rgba(175, 158, 133, 0.5)",
+              borderRadius: "0.75rem",
+              padding: "1rem",
+              backgroundColor: "var(--brand-white)"
+            }}
           >
-            <h3 style={{ marginTop: 0 }}>{feature.title}</h3>
-            <p style={{ marginBottom: 0, color: "#4b5563" }}>{feature.description}</p>
+            <h3 style={{ marginTop: 0, color: "var(--brand-primary)" }}>{feature.title}</h3>
+            <p style={{ marginBottom: 0, color: "var(--brand-cocoa)" }}>{feature.description}</p>
           </article>
         ))}
       </div>

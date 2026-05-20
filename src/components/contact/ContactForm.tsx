@@ -15,10 +15,12 @@ type ContactFormProps = {
 
 const baseInputStyles: CSSProperties = {
   width: "100%",
-  border: "1px solid #d1d5db",
+  border: "1px solid rgba(175, 158, 133, 0.6)",
   borderRadius: "0.5rem",
   padding: "0.625rem 0.75rem",
-  font: "inherit"
+  font: "inherit",
+  color: "var(--brand-deep-cocoa)",
+  backgroundColor: "var(--brand-white)"
 };
 
 function toOptionalString(value: FormDataEntryValue | null): string | undefined {
@@ -156,20 +158,21 @@ export default function ContactForm({ submitButtonLabel, successMessage }: Conta
           border: 0,
           borderRadius: "0.5rem",
           padding: "0.75rem 1rem",
-          backgroundColor: "#111827",
-          color: "#ffffff",
+          backgroundColor: "var(--brand-primary)",
+          color: "var(--brand-white)",
           font: "inherit",
-          cursor: submitState.type === "submitting" ? "not-allowed" : "pointer"
+          cursor: submitState.type === "submitting" ? "not-allowed" : "pointer",
+          fontWeight: 700
         }}
       >
         {submitState.type === "submitting" ? "Sending..." : submitButtonLabel}
       </button>
 
       {submitState.type === "success" ? (
-        <p style={{ margin: 0, color: "#065f46" }}>{submitState.message}</p>
+        <p style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>{submitState.message}</p>
       ) : null}
 
-      {submitState.type === "error" ? <p style={{ margin: 0, color: "#b91c1c" }}>{submitState.message}</p> : null}
+      {submitState.type === "error" ? <p style={{ margin: 0, color: "var(--brand-primary)" }}>{submitState.message}</p> : null}
     </form>
   );
 }

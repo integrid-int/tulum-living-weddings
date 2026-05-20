@@ -2,14 +2,14 @@ import { test, expect } from "@playwright/test";
 
 test("core routes return successful responses", async ({ page }) => {
   const routeMarkers: Record<string, string | RegExp> = {
-    "/": /Destination wedding planning rooted in Tulum expertise|Launch-ready pages before CMS content is seeded/,
-    "/how-we-can-help": "Structured support from planning to launch",
-    "/so-why-us": "Practical execution with predictable delivery",
-    "/gallery": "Snapshots of our process",
-    "/testimonials": "Feedback from teams we have supported",
-    "/faq": "Answers to common planning questions",
-    "/pricing": "Pick a package and move quickly",
-    "/contact": "Plan your Tulum celebration with local experts"
+    "/": /Welcome to Tulum Living Weddings and Events!|Destination wedding planning rooted in Tulum expertise/,
+    "/how-we-can-help": /How we can help|Structured support from planning to launch/,
+    "/so-why-us": /So- why us\?|Practical execution with predictable delivery/,
+    "/gallery": /Gallery of inspiration|Snapshots of our process/,
+    "/testimonials": /Testimonials|Feedback from teams we have supported/,
+    "/faq": /Frequently asked questions|Answers to common planning questions/,
+    "/pricing": /Planning packages|Pick a package and move quickly/,
+    "/contact": /Contact us|Plan your Tulum celebration with local experts/
   };
 
   for (const route of [

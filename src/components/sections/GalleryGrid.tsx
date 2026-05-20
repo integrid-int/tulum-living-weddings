@@ -1,6 +1,7 @@
 type GalleryItem = {
   title: string;
   caption: string;
+  imageUrl?: string;
 };
 
 type GalleryGridProps = {
@@ -10,26 +11,26 @@ type GalleryGridProps = {
 
 const defaultItems: GalleryItem[] = [
   {
-    title: "Project kickoff",
-    caption: "A focused session to align team goals and delivery expectations."
+    title: "Ceremony on the sand",
+    caption: "Beachside altar styling, seating, and floral details for golden-hour vows."
   },
   {
-    title: "Milestone review",
-    caption: "Structured checkpoints that keep progress visible and predictable."
+    title: "Reception under the stars",
+    caption: "Dinner layouts and party production tailored for destination wedding weekends."
   },
   {
-    title: "Launch handoff",
-    caption: "A clean baseline handoff package prepared for iteration."
+    title: "Design details in motion",
+    caption: "Signature flowers, table settings, and styling moments captured throughout the event."
   }
 ];
 
 export default function GalleryGrid({
-  heading = "Recent delivery snapshots",
+  heading = "Gallery of inspiration",
   items = defaultItems
 }: GalleryGridProps) {
   return (
     <section style={{ padding: "0 1.5rem 2rem", display: "grid", gap: "1rem" }}>
-      <h2 style={{ margin: 0 }}>{heading}</h2>
+      <h2 style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>{heading}</h2>
       <div
         style={{
           display: "grid",
@@ -41,16 +42,25 @@ export default function GalleryGrid({
           <article
             key={item.title}
             style={{
-              border: "1px solid #e5e7eb",
+              border: "1px solid rgba(175, 158, 133, 0.5)",
               borderRadius: "0.75rem",
               overflow: "hidden",
-              background: "#f9fafb"
+              background: "var(--brand-white)"
             }}
           >
-            <div style={{ background: "#dbeafe", height: "7.5rem" }} />
+            {item.imageUrl ? (
+              <img
+                src={item.imageUrl}
+                alt={item.title}
+                loading="lazy"
+                style={{ display: "block", width: "100%", height: "12rem", objectFit: "cover" }}
+              />
+            ) : (
+              <div style={{ background: "linear-gradient(135deg, var(--brand-sand), var(--brand-accent))", height: "12rem" }} />
+            )}
             <div style={{ padding: "0.9rem" }}>
-              <h3 style={{ margin: 0 }}>{item.title}</h3>
-              <p style={{ marginBottom: 0, color: "#4b5563" }}>{item.caption}</p>
+              <h3 style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>{item.title}</h3>
+              <p style={{ marginBottom: 0, color: "var(--brand-cocoa)" }}>{item.caption}</p>
             </div>
           </article>
         ))}

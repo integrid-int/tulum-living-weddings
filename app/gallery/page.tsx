@@ -11,6 +11,8 @@ import type { SanityGalleryItemDocument } from "@/src/lib/content";
 import { mapGalleryItems } from "@/src/lib/content";
 import { resolveMarketingCopy } from "@/src/lib/copy";
 import { buildRouteMetadata, type RouteSeoFields } from "@/src/lib/route-metadata";
+import { BRAND_GALLERY_IMAGE_SOURCES, BRAND_IMAGE_SOURCES } from "@/src/lib/brand";
+import { buildSanityImageUrl } from "@/sanity/lib/image";
 
 type GalleryPageDocument = {
   title?: string | null;
@@ -21,9 +23,9 @@ type GalleryPageDocument = {
 
 const FALLBACK_CONTENT = {
   eyebrow: "Gallery",
-  title: "Snapshots of our process",
+  title: "Gallery of inspiration",
   description:
-    "Explore ceremony styling, design details, and destination wedding moments from celebrations across Tulum."
+    "Explore inspiration across venues and ceremonies, flowers and decor, entertainment, captured moments, and food and beverage."
 };
 
 const getGalleryData = cache(async () => {
@@ -57,7 +59,10 @@ export default async function GalleryPage() {
     caption:
       item.category && item.category.trim().length > 0
         ? `${item.category} inspiration${item.source === "instagram" ? " from Instagram" : ""}`
-        : "Destination wedding design inspiration"
+        : "Destination wedding design inspiration",
+    imageUrl:
+      (item.images[0] ? buildSanityImageUrl(item.images[0], { width: 900, height: 600, fit: "crop" }) : null) ??
+      BRAND_GALLERY_IMAGE_SOURCES[item.sortOrder % BRAND_GALLERY_IMAGE_SOURCES.length]
   }));
 
   return (
@@ -66,6 +71,7 @@ export default async function GalleryPage() {
         eyebrow={FALLBACK_CONTENT.eyebrow}
         title={resolveMarketingCopy(page?.title, FALLBACK_CONTENT.title)}
         description={resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
+        backgroundImageUrl={BRAND_IMAGE_SOURCES.galleryHero}
       />
       <GalleryGrid items={mappedItems.length > 0 ? mappedItems : undefined} />
     </main>

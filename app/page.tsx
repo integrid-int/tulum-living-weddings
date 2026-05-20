@@ -9,6 +9,7 @@ import {
   PRICING_PACKAGES_QUERY,
   TESTIMONIALS_QUERY
 } from "@/sanity/lib/queries";
+import { buildSanityImageUrl, type SanityImageWithAlt } from "@/sanity/lib/image";
 import type {
   SanityCta,
   SanityPricingPackageDocument,
@@ -20,10 +21,12 @@ import {
 } from "@/src/lib/content";
 import { resolveMarketingCopy } from "@/src/lib/copy";
 import { buildRouteMetadata, type RouteSeoFields } from "@/src/lib/route-metadata";
+import { BRAND_IMAGE_SOURCES, BRAND_TESTIMONIAL_IMAGE_SOURCES } from "@/src/lib/brand";
 
 type HomePageDocument = {
   heroTitle?: string | null;
   heroSubtitle?: string | null;
+  heroImage?: SanityImageWithAlt | null;
   primaryCta?: SanityCta | null;
   seo?: RouteSeoFields | null;
   featuredTestimonials?: SanityTestimonialDocument[] | null;
@@ -32,11 +35,11 @@ type HomePageDocument = {
 
 const FALLBACK_CONTENT = {
   eyebrow: "Tulum Living Weddings",
-  title: "Destination wedding planning rooted in Tulum expertise",
+  title: "Welcome to Tulum Living Weddings and Events!",
   description:
-    "From concept to celebration day, we design and coordinate destination weddings across Tulum and the Riviera Maya.",
-  ctaLabel: "View pricing",
-  ctaHref: "/pricing"
+    "Congratulations on your engagement. We have been planning destination weddings in Tulum since 2009, from beach celebrations to cenote and jungle events.",
+  ctaLabel: "Start planning your wedding",
+  ctaHref: "/contact"
 };
 
 const getHomePageData = cache(async () => {
@@ -69,7 +72,10 @@ export default async function HomePage() {
   ).map((item) => ({
     quote: item.quote,
     author: item.coupleName,
-    role: item.location ?? item.eventType ?? undefined
+    role: item.location ?? item.eventType ?? undefined,
+    imageUrl:
+      (item.image ? buildSanityImageUrl(item.image, { width: 960, height: 640, fit: "crop" }) : null) ??
+      BRAND_TESTIMONIAL_IMAGE_SOURCES[item.sortOrder % BRAND_TESTIMONIAL_IMAGE_SOURCES.length]
   }));
 
   const featureItems = mapPricingPackages(
@@ -89,6 +95,10 @@ export default async function HomePage() {
         description={resolveMarketingCopy(page?.heroSubtitle, FALLBACK_CONTENT.description)}
         ctaLabel={page?.primaryCta?.label?.trim() || FALLBACK_CONTENT.ctaLabel}
         ctaHref={page?.primaryCta?.href?.trim() || FALLBACK_CONTENT.ctaHref}
+        backgroundImageUrl={
+          (page?.heroImage ? buildSanityImageUrl(page.heroImage, { width: 1800, height: 1100, fit: "crop" }) : null) ??
+          BRAND_IMAGE_SOURCES.homeHero
+        }
       />
       <FeatureGrid heading="Popular planning packages" features={featureItems.length > 0 ? featureItems : undefined} />
       <TestimonialsGrid

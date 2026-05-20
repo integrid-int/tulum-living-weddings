@@ -91,6 +91,42 @@ The app exposes `POST /api/revalidate` for on-demand cache invalidation after co
    - Value: the same secret as `SANITY_REVALIDATE_WEBHOOK_SECRET`
 5. Save webhook and publish a Sanity content change to verify the route returns `200` with an `ok: true` response.
 
+## Seed original website content into Sanity
+
+Use the seeding script to populate singleton pages and core collections with real copy adapted from the original website.
+
+### What gets seeded
+
+- Singletons: `siteSettings`, `navigation`, `pageHome`, `pageHowWeHelp`, `pageWhyUs`, `pageGallery`, `pageTestimonials`, `pageFaq`, `pagePricing`, `pageContact`
+- Collections: `galleryItem`, `testimonial`, `faqItem`, `pricingPackage`
+- Source images are downloaded from original `tulumlivingweddings.com` assets and uploaded to Sanity image assets.
+
+### Dry-run first
+
+```bash
+npm run seed:original:dry-run
+```
+
+### Apply seed to Sanity
+
+```bash
+npm run seed:original
+```
+
+Or override runtime config explicitly:
+
+```bash
+node scripts/seed-original-site-content.mjs --apply --project-id <projectId> --dataset production --token <sanityWriteToken>
+```
+
+### Optional payload export
+
+```bash
+node scripts/seed-original-site-content.mjs --dry-run --output ./data/original-seed-preview.json
+```
+
+> The seed script requires a valid `SANITY_API_WRITE_TOKEN` with document and asset write permissions.
+
 ## Manual Instagram import (operator guide)
 
 Use `scripts/import-instagram-manual.mjs` to normalize exported Instagram rows into gallery-item payloads.

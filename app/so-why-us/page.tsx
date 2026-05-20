@@ -21,6 +21,8 @@ import {
 } from "@/src/lib/content";
 import { resolveMarketingCopy } from "@/src/lib/copy";
 import { buildRouteMetadata, type RouteSeoFields } from "@/src/lib/route-metadata";
+import { BRAND_IMAGE_SOURCES, BRAND_TESTIMONIAL_IMAGE_SOURCES } from "@/src/lib/brand";
+import { buildSanityImageUrl } from "@/sanity/lib/image";
 
 type WhyUsPageDocument = {
   title?: string | null;
@@ -32,9 +34,9 @@ type WhyUsPageDocument = {
 
 const FALLBACK_CONTENT = {
   eyebrow: "So, Why Us?",
-  title: "Practical execution with predictable delivery",
+  title: "So- why us?",
   description:
-    "We focus on clear scope, short feedback loops, and a calm planning process that keeps your celebration on track.",
+    "We focus on communication, budget transparency, and trusted local relationships so planning stays clear, calm, and joyful.",
   ctaLabel: "Read testimonials",
   ctaHref: "/testimonials"
 };
@@ -82,7 +84,10 @@ export default async function SoWhyUsPage() {
   const testimonialCards = mapTestimonials(testimonials).map((item) => ({
     quote: item.quote,
     author: item.coupleName,
-    role: item.location ?? item.eventType ?? undefined
+    role: item.location ?? item.eventType ?? undefined,
+    imageUrl:
+      (item.image ? buildSanityImageUrl(item.image, { width: 960, height: 640, fit: "crop" }) : null) ??
+      BRAND_TESTIMONIAL_IMAGE_SOURCES[item.sortOrder % BRAND_TESTIMONIAL_IMAGE_SOURCES.length]
   }));
   const faqCards = mapFaqItems(faqItems).map((item) => ({
     question: item.question,
@@ -98,6 +103,7 @@ export default async function SoWhyUsPage() {
         description={resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
         ctaLabel={page?.primaryCta?.label?.trim() || FALLBACK_CONTENT.ctaLabel}
         ctaHref={page?.primaryCta?.href?.trim() || FALLBACK_CONTENT.ctaHref}
+        backgroundImageUrl={BRAND_IMAGE_SOURCES.whyUsHero}
       />
       <TestimonialsGrid
         heading="Proof from recent celebrations"

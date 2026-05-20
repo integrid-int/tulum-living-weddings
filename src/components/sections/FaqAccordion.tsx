@@ -10,16 +10,16 @@ type FaqAccordionProps = {
 
 const defaultFaqItems: FaqItem[] = [
   {
-    question: "Can these pages run before CMS content is ready?",
-    answer: "Yes. Each route uses static placeholder data and typed props."
+    question: "How far in advance should we start planning?",
+    answer: "Most destination couples start 9 to 14 months ahead, but we can also support shorter timelines."
   },
   {
-    question: "Will this block future Sanity integration?",
-    answer: "No. The sections are intentionally lightweight and easy to wire to query results."
+    question: "Can you help with legal ceremonies in Mexico?",
+    answer: "Yes. We guide document requirements and legal planning logistics for civil ceremonies."
   },
   {
-    question: "Is this production styling?",
-    answer: "No. It is a baseline visual shell to keep this task focused on route readiness."
+    question: "Do you coordinate guest logistics too?",
+    answer: "Absolutely. We support transfers, event-week communication, and guest experience planning."
   }
 ];
 
@@ -29,15 +29,20 @@ export default function FaqAccordion({
 }: FaqAccordionProps) {
   return (
     <section style={{ padding: "0 1.5rem 2rem", display: "grid", gap: "1rem" }}>
-      <h2 style={{ margin: 0 }}>{heading}</h2>
+      <h2 style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>{heading}</h2>
       <div style={{ display: "grid", gap: "0.75rem" }}>
         {items.map((item) => (
           <details
             key={item.question}
-            style={{ border: "1px solid #e5e7eb", borderRadius: "0.75rem", padding: "0.75rem 1rem" }}
+            style={{
+              border: "1px solid rgba(175, 158, 133, 0.5)",
+              borderRadius: "0.75rem",
+              padding: "0.75rem 1rem",
+              backgroundColor: "var(--brand-white)"
+            }}
           >
-            <summary style={{ cursor: "pointer", fontWeight: 600 }}>{item.question}</summary>
-            <p style={{ marginBottom: 0, color: "#4b5563" }}>{item.answer}</p>
+            <summary style={{ cursor: "pointer", fontWeight: 700, color: "var(--brand-primary)" }}>{item.question}</summary>
+            <p style={{ marginBottom: 0, color: "var(--brand-cocoa)" }}>{item.answer}</p>
           </details>
         ))}
       </div>

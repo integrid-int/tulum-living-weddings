@@ -16,6 +16,7 @@ import { mapPricingPackages } from "@/src/lib/content";
 import { resolveMarketingCopy } from "@/src/lib/copy";
 import { buildRouteMetadata, type RouteSeoFields } from "@/src/lib/route-metadata";
 import { buildPricingServiceJsonLd } from "@/src/lib/seo";
+import { BRAND_IMAGE_SOURCES } from "@/src/lib/brand";
 
 type PricingPageDocument = {
   title?: string | null;
@@ -27,10 +28,10 @@ type PricingPageDocument = {
 
 const FALLBACK_CONTENT = {
   eyebrow: "Pricing",
-  title: "Pick a package and move quickly",
+  title: "Planning packages",
   description:
-    "Flexible planning packages for destination weddings, from focused advisory sessions to full-service coordination.",
-  ctaLabel: "Start with a discovery call",
+    "Flexible planning packages tailored to your wedding scope, from advisory support to full-service coordination and event-week execution.",
+  ctaLabel: "Book a planning consultation",
   ctaHref: "/contact"
 };
 
@@ -102,6 +103,7 @@ export default async function PricingPage() {
         description={resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
         ctaLabel={page?.primaryCta?.label?.trim() || FALLBACK_CONTENT.ctaLabel}
         ctaHref={page?.primaryCta?.href?.trim() || FALLBACK_CONTENT.ctaHref}
+        backgroundImageUrl={BRAND_IMAGE_SOURCES.pricingHero}
       />
       <PricingCards tiers={renderedTiers} />
     </main>

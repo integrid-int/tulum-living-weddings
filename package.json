@@ -8,7 +8,9 @@
     "start": "next start",
     "test": "npm run test:unit",
     "test:unit": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "seed:original": "node scripts/seed-original-site-content.mjs --apply",
+    "seed:original:dry-run": "node scripts/seed-original-site-content.mjs --dry-run"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",

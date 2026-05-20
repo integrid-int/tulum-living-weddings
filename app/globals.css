@@ -2,11 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --brand-primary: #c34d5f;
+  --brand-sand: #dacbb2;
+  --brand-accent: #f8ba50;
+  --brand-cocoa: #8c6e61;
+  --brand-deep-cocoa: #5f4a42;
+  --brand-cream: #fff4e6;
+  --brand-white: #ffffff;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: var(--brand-deep-cocoa);
+  background: linear-gradient(180deg, var(--brand-cream) 0%, var(--brand-white) 420px);
+}
+
+a {
+  color: var(--brand-primary);
 }

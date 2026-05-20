@@ -11,6 +11,8 @@ import type { SanityTestimonialDocument } from "@/src/lib/content";
 import { mapTestimonials } from "@/src/lib/content";
 import { resolveMarketingCopy } from "@/src/lib/copy";
 import { buildRouteMetadata, type RouteSeoFields } from "@/src/lib/route-metadata";
+import { BRAND_IMAGE_SOURCES, BRAND_TESTIMONIAL_IMAGE_SOURCES } from "@/src/lib/brand";
+import { buildSanityImageUrl } from "@/sanity/lib/image";
 
 type TestimonialsPageDocument = {
   title?: string | null;
@@ -21,9 +23,9 @@ type TestimonialsPageDocument = {
 
 const FALLBACK_CONTENT = {
   eyebrow: "Testimonials",
-  title: "Feedback from teams we have supported",
+  title: "Testimonials",
   description:
-    "Hear from couples and families who trusted us to coordinate and design their destination weddings."
+    "Hear from couples and families who trusted our team to coordinate unforgettable destination weddings in Tulum."
 };
 
 const getTestimonialsData = cache(async () => {
@@ -55,7 +57,10 @@ export default async function TestimonialsPage() {
   ).map((item) => ({
     quote: item.quote,
     author: item.coupleName,
-    role: item.location ?? item.eventType ?? undefined
+    role: item.location ?? item.eventType ?? undefined,
+    imageUrl:
+      (item.image ? buildSanityImageUrl(item.image, { width: 960, height: 640, fit: "crop" }) : null) ??
+      BRAND_TESTIMONIAL_IMAGE_SOURCES[item.sortOrder % BRAND_TESTIMONIAL_IMAGE_SOURCES.length]
   }));
 
   return (
@@ -64,6 +69,7 @@ export default async function TestimonialsPage() {
         eyebrow={FALLBACK_CONTENT.eyebrow}
         title={resolveMarketingCopy(page?.title, FALLBACK_CONTENT.title)}
         description={resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
+        backgroundImageUrl={BRAND_IMAGE_SOURCES.testimonialsHero}
       />
       <TestimonialsGrid testimonials={mappedTestimonials.length > 0 ? mappedTestimonials : undefined} />
     </main>

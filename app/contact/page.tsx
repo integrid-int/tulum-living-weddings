@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import ContactForm from "@/src/components/contact/ContactForm";
 import { fetchSanitySafe } from "@/sanity/lib/client";
 import { PAGE_CONTACT_QUERY } from "@/sanity/lib/queries";
+import { BRAND_IMAGE_SOURCES } from "@/src/lib/brand";
 import { resolveMarketingCopy } from "@/src/lib/copy";
 import { buildRouteMetadata, type RouteSeoFields } from "@/src/lib/route-metadata";
 
@@ -18,10 +19,10 @@ type ContactPageDocument = {
 
 const FALLBACK_CONTENT = {
   eyebrow: "Contact",
-  title: "Plan your Tulum celebration with local experts",
+  title: "Contact us",
   description:
-    "Share your vision, timeline, and guest count, and our planning team will guide your next steps.",
-  email: "hello@tulumlivingweddings.com",
+    "Tell us about your event and we will guide your next steps. The best way to reach us is by email and we respond promptly.",
+  email: "TulumLiving@gmail.com",
   phone: "+529841230456",
   phoneDisplay: "+52 (984) 123-0456",
   submitButtonLabel: "Submit inquiry",
@@ -67,18 +68,28 @@ export default async function ContactPage() {
 
   return (
     <main>
-      <section style={{ display: "grid", gap: "1rem", padding: "2rem 1.5rem" }}>
-        <p style={{ margin: 0, color: "#2563eb", fontWeight: 600, textTransform: "uppercase" }}>{FALLBACK_CONTENT.eyebrow}</p>
+      <section
+        style={{
+          display: "grid",
+          gap: "1rem",
+          padding: "2.5rem 1.5rem",
+          backgroundImage: `linear-gradient(rgba(95, 74, 66, 0.64), rgba(95, 74, 66, 0.64)), url(${BRAND_IMAGE_SOURCES.contactHero})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          color: "var(--brand-white)"
+        }}
+      >
+        <p style={{ margin: 0, color: "var(--brand-accent)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.04em" }}>{FALLBACK_CONTENT.eyebrow}</p>
         <h1 style={{ margin: 0, fontSize: "2rem", lineHeight: 1.2 }}>
           {resolveMarketingCopy(page?.title, FALLBACK_CONTENT.title)}
         </h1>
-        <p style={{ margin: 0, maxWidth: "48rem", color: "#4b5563" }}>
+        <p style={{ margin: 0, maxWidth: "48rem", color: "rgba(255, 255, 255, 0.92)" }}>
           {resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
         </p>
       </section>
 
       <section style={{ padding: "0 1.5rem 2rem", display: "grid", gap: "1rem", maxWidth: "48rem" }}>
-        <h2 style={{ margin: 0 }}>Send us your wedding plans</h2>
+        <h2 style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>Send us your wedding plans</h2>
         <ContactForm
           submitButtonLabel={page?.submitButtonLabel?.trim() || FALLBACK_CONTENT.submitButtonLabel}
           successMessage={page?.successMessage?.trim() || FALLBACK_CONTENT.successMessage}
@@ -86,14 +97,14 @@ export default async function ContactPage() {
       </section>
 
       <section style={{ padding: "0 1.5rem 2rem", display: "grid", gap: "0.75rem" }}>
-        <h2 style={{ margin: 0 }}>Connect with our planning team</h2>
+        <h2 style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>Connect with our planning team</h2>
         <p style={{ margin: 0 }}>
           Email: <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
         </p>
         <p style={{ margin: 0 }}>
           Phone: <a href={`tel:${contactPhoneHref}`}>{contactPhoneRaw}</a>
         </p>
-        <p style={{ margin: 0, color: "#4b5563" }}>
+        <p style={{ margin: 0, color: "var(--brand-cocoa)" }}>
           Based in Tulum, Quintana Roo, serving destination weddings across the Riviera Maya.
         </p>
       </section>

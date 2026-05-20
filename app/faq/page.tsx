@@ -10,6 +10,7 @@ import { mapFaqItems, portableTextToPlainText } from "@/src/lib/content";
 import { resolveMarketingCopy } from "@/src/lib/copy";
 import { buildRouteMetadata, type RouteSeoFields } from "@/src/lib/route-metadata";
 import { buildFaqPageJsonLd } from "@/src/lib/seo";
+import { BRAND_IMAGE_SOURCES } from "@/src/lib/brand";
 
 type FaqPageDocument = {
   title?: string | null;
@@ -20,9 +21,9 @@ type FaqPageDocument = {
 
 const FALLBACK_CONTENT = {
   eyebrow: "FAQ",
-  title: "Answers to common planning questions",
+  title: "Frequently asked questions",
   description:
-    "Review timelines, vendor coordination, and travel planning details for destination weddings in Tulum."
+    "Answers to common planning questions for destination weddings in Tulum, from timelines and legal requirements to guest logistics."
 };
 
 const FALLBACK_FAQ_ITEMS = [
@@ -86,6 +87,7 @@ export default async function FaqPage() {
         eyebrow={FALLBACK_CONTENT.eyebrow}
         title={resolveMarketingCopy(page?.title, FALLBACK_CONTENT.title)}
         description={resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
+        backgroundImageUrl={BRAND_IMAGE_SOURCES.faqHero}
       />
       <FaqAccordion items={renderedFaqItems} />
     </main>

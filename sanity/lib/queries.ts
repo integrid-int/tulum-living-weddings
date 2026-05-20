@@ -87,6 +87,14 @@ export const PAGE_HOME_QUERY = groq`*[_type == "pageHome"][0] {
   title,
   heroTitle,
   heroSubtitle,
+  heroImage {
+    alt,
+    image {
+      asset,
+      crop,
+      hotspot
+    }
+  },
   primaryCta {
     label,
     href,

@@ -12,6 +12,7 @@ import type { SanityCta, SanityPricingPackageDocument } from "@/src/lib/content"
 import { mapPricingPackages } from "@/src/lib/content";
 import { resolveMarketingCopy } from "@/src/lib/copy";
 import { buildRouteMetadata, type RouteSeoFields } from "@/src/lib/route-metadata";
+import { BRAND_IMAGE_SOURCES } from "@/src/lib/brand";
 
 type HowWeHelpPageDocument = {
   title?: string | null;
@@ -23,9 +24,9 @@ type HowWeHelpPageDocument = {
 
 const FALLBACK_CONTENT = {
   eyebrow: "How We Can Help",
-  title: "Structured support from planning to launch",
+  title: "How we can help",
   description:
-    "Choose the level of planning support your event needs today, then scale with us as your celebration plans evolve.",
+    "From flowers and decor to entertainment and logistics, we coordinate trusted local experts to bring your destination wedding vision to life.",
   ctaLabel: "Contact us",
   ctaHref: "/contact"
 };
@@ -73,6 +74,7 @@ export default async function HowWeCanHelpPage() {
         description={resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
         ctaLabel={page?.primaryCta?.label?.trim() || FALLBACK_CONTENT.ctaLabel}
         ctaHref={page?.primaryCta?.href?.trim() || FALLBACK_CONTENT.ctaHref}
+        backgroundImageUrl={BRAND_IMAGE_SOURCES.howWeHelpHero}
       />
       <FeatureGrid heading="Support tracks" features={supportTracks.length > 0 ? supportTracks : undefined} />
       <PricingCards
