@@ -8,11 +8,6 @@ type SitemapRouteState = {
   noIndex?: boolean | null;
 };
 
-type SitemapDetailRoute = {
-  path?: string | null;
-  _updatedAt?: string | null;
-};
-
 type SitemapState = {
   home?: SitemapRouteState | null;
   howWeHelp?: SitemapRouteState | null;
@@ -26,10 +21,6 @@ type SitemapState = {
   testimonialsCollectionLastModified?: string | null;
   faqCollectionLastModified?: string | null;
   pricingCollectionLastModified?: string | null;
-  galleryDetailRoutes?: SitemapDetailRoute[] | null;
-  testimonialDetailRoutes?: SitemapDetailRoute[] | null;
-  faqDetailRoutes?: SitemapDetailRoute[] | null;
-  pricingDetailRoutes?: SitemapDetailRoute[] | null;
 };
 
 function parseDate(value: string | null | undefined): Date | null {
@@ -92,33 +83,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: route === "/" ? 1 : 0.7
     }));
 
-  const detailRouteConfigs: Array<{
-    parentPath: (typeof CANONICAL_ROUTES)[number];
-    routes: SitemapDetailRoute[] | null | undefined;
-  }> = [
-    { parentPath: "/gallery", routes: state?.galleryDetailRoutes },
-    { parentPath: "/testimonials", routes: state?.testimonialDetailRoutes },
-    { parentPath: "/faq", routes: state?.faqDetailRoutes },
-    { parentPath: "/pricing", routes: state?.pricingDetailRoutes }
-  ];
-
-  const detailEntries: MetadataRoute.Sitemap = detailRouteConfigs.flatMap(({ parentPath, routes }) => {
-    if (routeStateByPath[parentPath]?.noIndex ?? false) {
-      return [];
-    }
-
-    return (routes ?? [])
-      .filter((item): item is SitemapDetailRoute & { path: string } => Boolean(item.path))
-      .map((item) => ({
-        url: buildCanonicalUrl(SITE_URL, item.path),
-        lastModified: pickLastModified(lastModified, item._updatedAt),
-        changeFrequency: "monthly",
-        priority: 0.6
-      }));
-  });
-
   const uniqueByUrl = new Map<string, MetadataRoute.Sitemap[number]>();
-  for (const entry of [...routeEntries, ...detailEntries]) {
+  for (const entry of routeEntries) {
     uniqueByUrl.set(entry.url, entry);
   }
 

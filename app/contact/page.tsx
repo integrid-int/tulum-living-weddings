@@ -28,6 +28,21 @@ const FALLBACK_CONTENT = {
   successMessage: "Thanks for reaching out. Our planning team will contact you shortly."
 };
 
+function sanitizePhoneForTel(phone: string | null | undefined): string | null {
+  const trimmed = phone?.trim();
+  if (!trimmed) {
+    return null;
+  }
+
+  const digitsOnly = trimmed.replace(/\D/g, "");
+  if (digitsOnly.length < 7) {
+    return null;
+  }
+
+  const hasInternationalPrefix = trimmed.startsWith("+") || trimmed.startsWith("00");
+  return hasInternationalPrefix ? `+${digitsOnly}` : digitsOnly;
+}
+
 const getContactPageData = cache(async () => fetchSanitySafe<ContactPageDocument | null>(PAGE_CONTACT_QUERY, null));
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -44,11 +59,11 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ContactPage() {
   const page = await getContactPageData();
   const contactEmail = page?.contactEmail?.trim() || FALLBACK_CONTENT.email;
-  const contactPhoneRaw = page?.contactPhone?.trim() || FALLBACK_CONTENT.phoneDisplay;
-  const contactPhoneHref =
-    contactPhoneRaw.startsWith("+") || contactPhoneRaw.startsWith("00")
-      ? contactPhoneRaw.replace(/[^\d+]/g, "")
-      : FALLBACK_CONTENT.phone;
+  const cmsPhone = page?.contactPhone?.trim() ?? "";
+  const sanitizedCmsPhone = sanitizePhoneForTel(cmsPhone);
+  const hasValidCmsPhone = cmsPhone.length > 0 && sanitizedCmsPhone !== null;
+  const contactPhoneRaw = hasValidCmsPhone ? cmsPhone : FALLBACK_CONTENT.phoneDisplay;
+  const contactPhoneHref = hasValidCmsPhone ? sanitizedCmsPhone : FALLBACK_CONTENT.phone;
 
   return (
     <main>
