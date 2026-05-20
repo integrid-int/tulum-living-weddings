@@ -33,6 +33,9 @@ export default function SiteHeader({
         borderBottom: "1px solid rgba(140, 110, 97, 0.28)",
         backgroundColor: "rgba(255, 255, 255, 0.94)",
         backdropFilter: "saturate(140%) blur(3px)",
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
         padding: "0.9rem 1.5rem",
         display: "flex",
         flexWrap: "wrap",
@@ -54,7 +57,7 @@ export default function SiteHeader({
         />
         <span>{title}</span>
       </Link>
-      <nav aria-label="Primary">
+      <nav aria-label="Primary" style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
         <ul
           style={{
             listStyle: "none",
@@ -80,6 +83,20 @@ export default function SiteHeader({
             </li>
           ))}
         </ul>
+        <Link
+          href="/contact"
+          style={{
+            color: "var(--brand-white)",
+            textDecoration: "none",
+            fontWeight: 700,
+            backgroundColor: "var(--brand-primary)",
+            borderRadius: "999px",
+            padding: "0.45rem 0.85rem",
+            fontSize: "0.92rem"
+          }}
+        >
+          Book consultation
+        </Link>
       </nav>
     </header>
   );

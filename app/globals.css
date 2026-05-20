@@ -18,11 +18,23 @@
 
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-body), "Helvetica Neue", Arial, sans-serif;
   color: var(--brand-deep-cocoa);
-  background: linear-gradient(180deg, var(--brand-cream) 0%, var(--brand-white) 420px);
+  background:
+    radial-gradient(circle at 15% -10%, rgba(248, 186, 80, 0.24), transparent 45%),
+    radial-gradient(circle at 85% 0%, rgba(195, 77, 95, 0.18), transparent 35%),
+    linear-gradient(180deg, var(--brand-cream) 0%, var(--brand-white) 430px);
+  line-height: 1.5;
 }
 
 a {
   color: var(--brand-primary);
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+  font-family: var(--font-display), Georgia, serif;
+  letter-spacing: 0.01em;
 }

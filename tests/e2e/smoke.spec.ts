@@ -30,3 +30,14 @@ test("core routes return successful responses", async ({ page }) => {
     await expect(page.getByRole("heading", { level: 1 })).toContainText(routeMarkers[route]);
   }
 });
+
+test("home page renders premium trust signals", async ({ page }) => {
+  await page.goto("/");
+
+  const trustSignals = page.getByTestId("trust-signals");
+  await expect(trustSignals).toContainText("Trusted by destination couples worldwide");
+  await expect(trustSignals).toContainText("300+");
+  await expect(trustSignals).toContainText("celebrations curated");
+  await expect(trustSignals).toContainText("15+");
+  await expect(trustSignals).toContainText("years of Riviera Maya expertise");
+});

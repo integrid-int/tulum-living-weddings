@@ -28,7 +28,8 @@ export default function FaqAccordion({
   items = defaultFaqItems
 }: FaqAccordionProps) {
   return (
-    <section style={{ padding: "0 1.5rem 2rem", display: "grid", gap: "1rem" }}>
+    <section style={{ padding: "0 1.5rem 2.25rem" }}>
+      <div style={{ margin: "0 auto", maxWidth: "70rem", display: "grid", gap: "1rem" }}>
       <h2 style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>{heading}</h2>
       <div style={{ display: "grid", gap: "0.75rem" }}>
         {items.map((item) => (
@@ -38,13 +39,15 @@ export default function FaqAccordion({
               border: "1px solid rgba(175, 158, 133, 0.5)",
               borderRadius: "0.75rem",
               padding: "0.75rem 1rem",
-              backgroundColor: "var(--brand-white)"
+              backgroundColor: "var(--brand-white)",
+              boxShadow: "0 6px 16px rgba(95, 74, 66, 0.06)"
             }}
           >
             <summary style={{ cursor: "pointer", fontWeight: 700, color: "var(--brand-primary)" }}>{item.question}</summary>
             <p style={{ marginBottom: 0, color: "var(--brand-cocoa)" }}>{item.answer}</p>
           </details>
         ))}
+      </div>
       </div>
     </section>
   );

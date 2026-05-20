@@ -2,7 +2,9 @@ import { cache } from "react";
 import type { Metadata } from "next";
 import FeatureGrid from "@/src/components/sections/FeatureGrid";
 import Hero from "@/src/components/sections/Hero";
+import PlanningProcess from "@/src/components/sections/PlanningProcess";
 import TestimonialsGrid from "@/src/components/sections/TestimonialsGrid";
+import TrustSignals from "@/src/components/sections/TrustSignals";
 import { fetchSanitySafe } from "@/sanity/lib/client";
 import {
   PAGE_HOME_QUERY,
@@ -100,7 +102,16 @@ export default async function HomePage() {
           BRAND_IMAGE_SOURCES.homeHero
         }
       />
-      <FeatureGrid heading="Popular planning packages" features={featureItems.length > 0 ? featureItems : undefined} />
+      <TrustSignals
+        signals={[
+          { value: "300+", label: "celebrations curated" },
+          { value: "15+", label: "years of Riviera Maya expertise" },
+          { value: "40+", label: "exclusive venues and trusted partners" },
+          { value: "4.9/5", label: "average couple satisfaction" }
+        ]}
+      />
+      <FeatureGrid heading="Signature planning experiences" features={featureItems.length > 0 ? featureItems : undefined} />
+      <PlanningProcess />
       <TestimonialsGrid
         heading="Stories from recent celebrations"
         testimonials={testimonialItems.length > 0 ? testimonialItems : undefined}

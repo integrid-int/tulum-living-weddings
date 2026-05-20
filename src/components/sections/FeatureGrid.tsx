@@ -28,7 +28,8 @@ export default function FeatureGrid({
   features = defaultFeatures
 }: FeatureGridProps) {
   return (
-    <section style={{ padding: "0 1.5rem 2rem", display: "grid", gap: "1rem" }}>
+    <section style={{ padding: "0 1.5rem 2.25rem" }}>
+      <div style={{ margin: "0 auto", maxWidth: "70rem", display: "grid", gap: "1rem" }}>
       <h2 style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>{heading}</h2>
       <div
         style={{
@@ -44,13 +45,15 @@ export default function FeatureGrid({
               border: "1px solid rgba(175, 158, 133, 0.5)",
               borderRadius: "0.75rem",
               padding: "1rem",
-              backgroundColor: "var(--brand-white)"
+              backgroundColor: "var(--brand-white)",
+              boxShadow: "0 8px 20px rgba(95, 74, 66, 0.08)"
             }}
           >
             <h3 style={{ marginTop: 0, color: "var(--brand-primary)" }}>{feature.title}</h3>
             <p style={{ marginBottom: 0, color: "var(--brand-cocoa)" }}>{feature.description}</p>
           </article>
         ))}
+      </div>
       </div>
     </section>
   );
