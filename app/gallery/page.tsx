@@ -1,5 +1,6 @@
 import { cache } from "react";
 import type { Metadata } from "next";
+import EditorialMotifPanel from "@/src/components/sections/EditorialMotifPanel";
 import GalleryGrid from "@/src/components/sections/GalleryGrid";
 import Hero from "@/src/components/sections/Hero";
 import { fetchSanitySafe } from "@/sanity/lib/client";
@@ -69,9 +70,16 @@ export default async function GalleryPage() {
     <main>
       <Hero
         eyebrow={FALLBACK_CONTENT.eyebrow}
+        kicker="A visual moodbook of Riviera Maya light, texture, and celebration."
         title={resolveMarketingCopy(page?.title, FALLBACK_CONTENT.title)}
         description={resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
         backgroundImageUrl={BRAND_IMAGE_SOURCES.galleryHero}
+      />
+      <EditorialMotifPanel
+        label="Visual Direction"
+        headline="Curated imagery that informs design, styling, and emotional tone."
+        detail="Use this collection as a refined reference for ceremony architecture, reception atmosphere, and guest experience moments."
+        tags={["Ceremony Styling", "Reception Atmosphere", "Editorial Photography"]}
       />
       <GalleryGrid items={mappedItems.length > 0 ? mappedItems : undefined} />
     </main>

@@ -36,8 +36,8 @@ export default function TrustSignals({
           borderRadius: "1rem",
           padding: "1.25rem",
           backgroundColor: "var(--brand-white)",
-          border: "1px solid rgba(195, 77, 95, 0.2)",
-          boxShadow: "0 18px 38px rgba(95, 74, 66, 0.12)"
+          border: "1px solid rgba(var(--brand-primary-rgb), 0.22)",
+          boxShadow: "0 18px 38px rgba(var(--brand-ink-rgb), 0.12)"
         }}
       >
         <h2 style={{ margin: "0 0 1rem", color: "var(--brand-deep-cocoa)" }}>{heading}</h2>
@@ -54,8 +54,8 @@ export default function TrustSignals({
               className="luxury-card"
               style={{
                 borderRadius: "0.85rem",
-                border: "1px solid rgba(175, 158, 133, 0.42)",
-                background: "linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 244, 230, 0.7))",
+                border: "1px solid rgba(var(--brand-platinum-rgb), 0.45)",
+                background: "linear-gradient(145deg, rgba(var(--brand-white-rgb), 0.98), rgba(var(--brand-sand-rgb), 0.7))",
                 padding: "0.85rem"
               }}
             >

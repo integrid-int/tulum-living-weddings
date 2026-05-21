@@ -9,7 +9,7 @@ export default function SiteFooter({ companyName = "Tulum Living Weddings" }: Si
     <footer
       data-testid="site-footer"
       style={{
-        borderTop: "1px solid rgba(140, 110, 97, 0.35)",
+        borderTop: "1px solid rgba(var(--brand-platinum-rgb), 0.36)",
         padding: "2rem 1.5rem",
         display: "grid",
         gap: "0.95rem",

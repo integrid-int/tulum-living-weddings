@@ -1,5 +1,6 @@
 import { cache } from "react";
 import type { Metadata } from "next";
+import EditorialMotifPanel from "@/src/components/sections/EditorialMotifPanel";
 import FaqAccordion from "@/src/components/sections/FaqAccordion";
 import Hero from "@/src/components/sections/Hero";
 import TestimonialsGrid from "@/src/components/sections/TestimonialsGrid";
@@ -99,11 +100,18 @@ export default async function SoWhyUsPage() {
     <main>
       <Hero
         eyebrow={FALLBACK_CONTENT.eyebrow}
+        kicker="A calm, high-touch process for high-stakes wedding weekends."
         title={resolveMarketingCopy(page?.title, FALLBACK_CONTENT.title)}
         description={resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
         ctaLabel={page?.primaryCta?.label?.trim() || FALLBACK_CONTENT.ctaLabel}
         ctaHref={page?.primaryCta?.href?.trim() || FALLBACK_CONTENT.ctaHref}
         backgroundImageUrl={BRAND_IMAGE_SOURCES.whyUsHero}
+      />
+      <EditorialMotifPanel
+        label="Our Signature"
+        headline="Calm communication. Exacting execution. Elevated guest memory."
+        detail="We prioritize transparent decisions, proactive vendor leadership, and polished event flow at every stage."
+        tags={["Transparent Planning", "Luxury Logistics", "Execution Excellence"]}
       />
       <TestimonialsGrid
         heading="Proof from recent celebrations"

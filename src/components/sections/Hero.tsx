@@ -2,6 +2,7 @@ import Link from "next/link";
 
 type HeroProps = {
   eyebrow?: string;
+  kicker?: string;
   title: string;
   description: string;
   ctaLabel?: string;
@@ -13,6 +14,7 @@ type HeroProps = {
 
 export default function Hero({
   eyebrow,
+  kicker,
   title,
   description,
   ctaLabel,
@@ -28,8 +30,8 @@ export default function Hero({
         padding: "3.5rem 1.5rem 4.5rem",
         backgroundColor: "var(--brand-sand)",
         backgroundImage: backgroundImageUrl
-          ? `linear-gradient(rgba(95, 74, 66, 0.6), rgba(95, 74, 66, 0.56)), url(${backgroundImageUrl})`
-          : "linear-gradient(120deg, rgba(195, 77, 95, 0.16), rgba(248, 186, 80, 0.24))",
+          ? `linear-gradient(rgba(var(--brand-ink-rgb), 0.66), rgba(var(--brand-ink-rgb), 0.58)), url(${backgroundImageUrl})`
+          : "linear-gradient(120deg, rgba(var(--brand-primary-rgb), 0.2), rgba(var(--brand-accent-rgb), 0.22))",
         backgroundSize: "cover",
         backgroundPosition: "center",
         color: "var(--brand-white)",
@@ -54,6 +56,11 @@ export default function Hero({
         {eyebrow ? (
           <p style={{ margin: 0, color: "var(--brand-accent)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>
             {eyebrow}
+          </p>
+        ) : null}
+        {kicker ? (
+          <p style={{ margin: 0, color: "rgba(var(--brand-white-rgb), 0.92)", fontWeight: 600, fontStyle: "italic", letterSpacing: "0.01em" }}>
+            {kicker}
           </p>
         ) : null}
         <h1

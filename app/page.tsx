@@ -1,6 +1,7 @@
 import { cache } from "react";
 import type { Metadata } from "next";
 import AsSeenInStrip from "@/src/components/sections/AsSeenInStrip";
+import EditorialMotifPanel from "@/src/components/sections/EditorialMotifPanel";
 import FeatureGrid from "@/src/components/sections/FeatureGrid";
 import Hero from "@/src/components/sections/Hero";
 import PlanningProcess from "@/src/components/sections/PlanningProcess";
@@ -94,6 +95,7 @@ export default async function HomePage() {
     <main>
       <Hero
         eyebrow={FALLBACK_CONTENT.eyebrow}
+        kicker="Where Riviera Maya elegance meets effortless execution."
         title={resolveMarketingCopy(page?.heroTitle, FALLBACK_CONTENT.title)}
         description={resolveMarketingCopy(page?.heroSubtitle, FALLBACK_CONTENT.description)}
         ctaLabel={page?.primaryCta?.label?.trim() || FALLBACK_CONTENT.ctaLabel}
@@ -114,6 +116,12 @@ export default async function HomePage() {
         ]}
       />
       <AsSeenInStrip />
+      <EditorialMotifPanel
+        label="Editorial Signature"
+        headline="Destination weddings designed with modern restraint and unforgettable atmosphere."
+        detail="Our design direction blends Riviera Maya texture, luxury hospitality precision, and deeply personal storytelling."
+        tags={["Creative Direction", "Guest Choreography", "Timeless Styling"]}
+      />
       <FeatureGrid heading="Signature planning experiences" features={featureItems.length > 0 ? featureItems : undefined} />
       <PlanningProcess />
       <TestimonialsGrid

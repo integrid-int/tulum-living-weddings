@@ -1,6 +1,7 @@
 import { cache } from "react";
 import type { Metadata } from "next";
 import ContactForm from "@/src/components/contact/ContactForm";
+import EditorialMotifPanel from "@/src/components/sections/EditorialMotifPanel";
 import { fetchSanitySafe } from "@/sanity/lib/client";
 import { PAGE_CONTACT_QUERY } from "@/sanity/lib/queries";
 import { BRAND_IMAGE_SOURCES } from "@/src/lib/brand";
@@ -75,7 +76,7 @@ export default async function ContactPage() {
           alignContent: "end",
           minHeight: "clamp(24rem, 52vh, 35rem)",
           padding: "3rem 1.5rem 3.8rem",
-          backgroundImage: `linear-gradient(rgba(95, 74, 66, 0.64), rgba(95, 74, 66, 0.64)), url(${BRAND_IMAGE_SOURCES.contactHero})`,
+          backgroundImage: `linear-gradient(rgba(var(--brand-ink-rgb), 0.68), rgba(var(--brand-ink-rgb), 0.62)), url(${BRAND_IMAGE_SOURCES.contactHero})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           color: "var(--brand-white)"
@@ -104,6 +105,13 @@ export default async function ContactPage() {
           </p>
         </div>
       </section>
+
+      <EditorialMotifPanel
+        label="Concierge Access"
+        headline="A direct planning line for couples who want refined guidance, fast."
+        detail="Share your vision and constraints, and we’ll return with a strategic roadmap for venues, design, and execution."
+        tags={["24h Response", "Bespoke Strategy", "On-Site Leadership"]}
+      />
 
       <section className="editorial-fade-up editorial-fade-up-delay" style={{ padding: "0 1.5rem 2.4rem" }}>
         <div

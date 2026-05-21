@@ -6,7 +6,7 @@ export default function LuxuryRibbon() {
       data-testid="luxury-ribbon"
       style={{
         background:
-          "linear-gradient(90deg, rgba(95, 74, 66, 0.96), rgba(195, 77, 95, 0.96), rgba(95, 74, 66, 0.96))",
+          "linear-gradient(90deg, rgba(var(--brand-ink-rgb), 0.96), rgba(var(--brand-primary-rgb), 0.96), rgba(var(--brand-ink-rgb), 0.96))",
         borderBottom: "1px solid rgba(255, 255, 255, 0.22)"
       }}
     >

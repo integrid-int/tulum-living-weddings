@@ -1,5 +1,6 @@
 import { cache } from "react";
 import type { Metadata } from "next";
+import EditorialMotifPanel from "@/src/components/sections/EditorialMotifPanel";
 import FeatureGrid from "@/src/components/sections/FeatureGrid";
 import Hero from "@/src/components/sections/Hero";
 import PricingCards from "@/src/components/sections/PricingCards";
@@ -70,11 +71,18 @@ export default async function HowWeCanHelpPage() {
     <main>
       <Hero
         eyebrow={FALLBACK_CONTENT.eyebrow}
+        kicker="Strategic planning support tailored to your event’s complexity."
         title={resolveMarketingCopy(page?.title, FALLBACK_CONTENT.title)}
         description={resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
         ctaLabel={page?.primaryCta?.label?.trim() || FALLBACK_CONTENT.ctaLabel}
         ctaHref={page?.primaryCta?.href?.trim() || FALLBACK_CONTENT.ctaHref}
         backgroundImageUrl={BRAND_IMAGE_SOURCES.howWeHelpHero}
+      />
+      <EditorialMotifPanel
+        label="Service Architecture"
+        headline="Every celebration is produced like a private hospitality experience."
+        detail="From creative partners to logistics choreography, we structure your planning journey with premium clarity."
+        tags={["Venue Intelligence", "Design Language", "Guest Concierge"]}
       />
       <FeatureGrid heading="Support tracks" features={supportTracks.length > 0 ? supportTracks : undefined} />
       <PricingCards

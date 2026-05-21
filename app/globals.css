@@ -3,13 +3,22 @@
 @tailwind utilities;
 
 :root {
-  --brand-primary: #c34d5f;
-  --brand-sand: #dacbb2;
-  --brand-accent: #f8ba50;
-  --brand-cocoa: #8c6e61;
-  --brand-deep-cocoa: #5f4a42;
-  --brand-cream: #fff4e6;
+  --brand-primary: #7c2848;
+  --brand-primary-rgb: 124, 40, 72;
+  --brand-sand: #f0e9df;
+  --brand-sand-rgb: 240, 233, 223;
+  --brand-accent: #d8b574;
+  --brand-accent-rgb: 216, 181, 116;
+  --brand-cocoa: #66574d;
+  --brand-cocoa-rgb: 102, 87, 77;
+  --brand-deep-cocoa: #2b2530;
+  --brand-ink: #1f2430;
+  --brand-ink-rgb: 31, 36, 48;
+  --brand-platinum: #d9cec0;
+  --brand-platinum-rgb: 217, 206, 192;
+  --brand-cream: #faf6ef;
   --brand-white: #ffffff;
+  --brand-white-rgb: 255, 255, 255;
 }
 
 * {
@@ -19,10 +28,11 @@
 body {
   margin: 0;
   font-family: var(--font-body), "Helvetica Neue", Arial, sans-serif;
-  color: var(--brand-deep-cocoa);
+  color: var(--brand-ink);
   background:
-    radial-gradient(circle at 15% -10%, rgba(248, 186, 80, 0.24), transparent 45%),
-    radial-gradient(circle at 85% 0%, rgba(195, 77, 95, 0.18), transparent 35%),
+    radial-gradient(circle at 15% -10%, rgba(var(--brand-accent-rgb), 0.23), transparent 45%),
+    radial-gradient(circle at 85% 0%, rgba(var(--brand-primary-rgb), 0.16), transparent 35%),
+    radial-gradient(circle at 10% 90%, rgba(var(--brand-ink-rgb), 0.08), transparent 35%),
     linear-gradient(180deg, var(--brand-cream) 0%, var(--brand-white) 430px);
   line-height: 1.5;
   scroll-behavior: smooth;
@@ -42,7 +52,7 @@ body {
   background-image:
     radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.4), transparent 30%),
     radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.22), transparent 35%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238c6e61' fill-opacity='0.14'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2366574d' fill-opacity='0.12'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 a {
@@ -111,7 +121,7 @@ h3 {
 
   .luxury-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 18px 34px rgba(95, 74, 66, 0.14);
+    box-shadow: 0 18px 34px rgba(var(--brand-ink-rgb), 0.14);
   }
 
   .luxury-fab:hover,

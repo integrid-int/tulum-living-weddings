@@ -18,7 +18,7 @@ export default function ConciergeFab() {
         borderRadius: "999px",
         padding: "0.72rem 1rem",
         fontWeight: 700,
-        boxShadow: "0 14px 26px rgba(95, 74, 66, 0.34)"
+        boxShadow: "0 14px 26px rgba(var(--brand-ink-rgb), 0.34)"
       }}
     >
       Plan with concierge

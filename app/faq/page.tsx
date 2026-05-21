@@ -1,5 +1,6 @@
 import { cache } from "react";
 import type { Metadata } from "next";
+import EditorialMotifPanel from "@/src/components/sections/EditorialMotifPanel";
 import FaqAccordion from "@/src/components/sections/FaqAccordion";
 import Hero from "@/src/components/sections/Hero";
 import JsonLd from "@/src/components/seo/JsonLd";
@@ -85,9 +86,16 @@ export default async function FaqPage() {
       <JsonLd data={faqJsonLd} />
       <Hero
         eyebrow={FALLBACK_CONTENT.eyebrow}
+        kicker="Clear answers for confident destination planning decisions."
         title={resolveMarketingCopy(page?.title, FALLBACK_CONTENT.title)}
         description={resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
         backgroundImageUrl={BRAND_IMAGE_SOURCES.faqHero}
+      />
+      <EditorialMotifPanel
+        label="Planning Clarity"
+        headline="Direct guidance for legal, logistics, and guest-experience decisions."
+        detail="Use this guide as your quick-reference framework while we tailor details to your specific celebration."
+        tags={["Legal Guidance", "Timeline Strategy", "Guest Operations"]}
       />
       <FaqAccordion items={renderedFaqItems} />
     </main>

@@ -30,7 +30,7 @@ export default function SiteHeader({
     <header
       data-testid="site-header"
       style={{
-        borderBottom: "1px solid rgba(140, 110, 97, 0.28)",
+        borderBottom: "1px solid rgba(var(--brand-cocoa-rgb), 0.24)",
         backgroundColor: "rgba(255, 255, 255, 0.94)",
         backdropFilter: "saturate(140%) blur(3px)",
         position: "sticky",

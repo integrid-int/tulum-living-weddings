@@ -57,3 +57,11 @@ test("site renders ultra luxury global touches", async ({ page }) => {
   await expect(page.getByTestId("luxury-ribbon")).toContainText("Limited 2027 luxury dates now open");
   await expect(page.getByTestId("concierge-fab")).toContainText("Plan with concierge");
 });
+
+test("pricing route includes editorial motif panel", async ({ page }) => {
+  await page.goto("/pricing");
+
+  const motif = page.getByTestId("editorial-motif");
+  await expect(motif).toContainText("Investment Philosophy");
+  await expect(motif).toContainText("Flexible scopes. Non-negotiable standards.");
+});
