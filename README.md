@@ -161,3 +161,39 @@ node scripts/import-instagram-manual.mjs --input ./data/instagram.csv --output .
 If `--output` is omitted, the script writes `<input>.gallery-import.json`.
 
 > The generated payload is metadata only (`title`, `category`, permalink/source flags, etc.). You still need to upload/link image assets manually in Sanity and attach them to each `galleryItem`.
+
+## Google Business import (reviews + photos)
+
+Use `scripts/import-google-business.mjs` to ingest Google Business reviews and photos, then upsert them into Sanity as `testimonial` and `galleryItem` docs.
+
+### 1) Dry-run with Google Places API
+
+```bash
+node scripts/import-google-business.mjs \
+  --api-key "$GOOGLE_PLACES_API_KEY" \
+  --place-query "Tulum Living Weddings Riviera Maya" \
+  --max-reviews 12 \
+  --max-photos 12 \
+  --dry-run \
+  --output ./data/google-business-preview.json
+```
+
+### 2) Apply directly to Sanity
+
+```bash
+node scripts/import-google-business.mjs \
+  --api-key "$GOOGLE_PLACES_API_KEY" \
+  --place-query "Tulum Living Weddings Riviera Maya" \
+  --max-reviews 12 \
+  --max-photos 12 \
+  --apply \
+  --sanity-project-id "$NEXT_PUBLIC_SANITY_PROJECT_ID" \
+  --sanity-dataset "$NEXT_PUBLIC_SANITY_DATASET" \
+  --sanity-token "$SANITY_API_WRITE_TOKEN"
+```
+
+### Notes
+
+- Google short share links can trigger anti-bot pages in server environments. If your `share.google/...` link does not resolve cleanly, use `--place-query` or `--place-id`.
+- On apply mode, imported photos are downloaded from Google Places and uploaded to Sanity image assets.
+- The importer also patches featured references on `page.gallery`, `page.testimonials`, and `page.home` to surface imported content on the live pages.
