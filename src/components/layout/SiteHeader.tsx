@@ -13,13 +13,13 @@ type SiteHeaderProps = {
 
 const defaultLinks: NavLink[] = [
   { href: "/", label: "Home" },
-  { href: "/how-we-can-help", label: "How We Can Help" },
-  { href: "/so-why-us", label: "Why Us" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/how-we-can-help", label: "Services" },
+  { href: "/so-why-us", label: "Why Tulum Living" },
+  { href: "/gallery", label: "Inspiration" },
   { href: "/testimonials", label: "Testimonials" },
   { href: "/faq", label: "FAQ" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/contact", label: "Contact" }
+  { href: "/contact", label: "Inquire" }
 ];
 
 export default function SiteHeader({
@@ -30,9 +30,12 @@ export default function SiteHeader({
     <header
       data-testid="site-header"
       style={{
-        borderBottom: "1px solid rgba(140, 110, 97, 0.28)",
+        borderBottom: "1px solid rgba(var(--brand-cocoa-rgb), 0.24)",
         backgroundColor: "rgba(255, 255, 255, 0.94)",
         backdropFilter: "saturate(140%) blur(3px)",
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
         padding: "0.9rem 1.5rem",
         display: "flex",
         flexWrap: "wrap",
@@ -54,7 +57,7 @@ export default function SiteHeader({
         />
         <span>{title}</span>
       </Link>
-      <nav aria-label="Primary">
+      <nav aria-label="Primary" style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
         <ul
           style={{
             listStyle: "none",
@@ -69,10 +72,12 @@ export default function SiteHeader({
             <li key={link.href}>
               <Link
                 href={link.href}
+                className="luxury-nav-link"
                 style={{
                   color: "var(--brand-cocoa)",
                   textDecoration: "none",
-                  fontWeight: 600
+                  fontWeight: 600,
+                  transition: "color 180ms ease"
                 }}
               >
                 {link.label}
@@ -80,6 +85,22 @@ export default function SiteHeader({
             </li>
           ))}
         </ul>
+        <Link
+          href="/contact"
+          className="luxury-pill-link"
+          style={{
+            color: "var(--brand-white)",
+            textDecoration: "none",
+            fontWeight: 700,
+            backgroundColor: "var(--brand-primary)",
+            borderRadius: "999px",
+            padding: "0.45rem 0.85rem",
+            fontSize: "0.92rem",
+            transition: "transform 180ms ease, box-shadow 180ms ease"
+          }}
+        >
+          Reserve private consult
+        </Link>
       </nav>
     </header>
   );

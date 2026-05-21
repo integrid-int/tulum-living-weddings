@@ -30,3 +30,38 @@ test("core routes return successful responses", async ({ page }) => {
     await expect(page.getByRole("heading", { level: 1 })).toContainText(routeMarkers[route]);
   }
 });
+
+test("home page renders premium trust signals", async ({ page }) => {
+  await page.goto("/");
+
+  const trustSignals = page.getByTestId("trust-signals");
+  await expect(trustSignals).toContainText("Chosen by destination couples with high standards");
+  await expect(trustSignals).toContainText("300+");
+  await expect(trustSignals).toContainText("celebrations curated");
+  await expect(trustSignals).toContainText("15+");
+  await expect(trustSignals).toContainText("years of Riviera Maya expertise");
+});
+
+test("home page renders editorial as-seen-in strip", async ({ page }) => {
+  await page.goto("/");
+
+  const asSeenIn = page.getByTestId("as-seen-in");
+  await expect(asSeenIn).toContainText("As seen in and trusted by");
+  await expect(asSeenIn).toContainText("Wedding Chicks");
+  await expect(asSeenIn).toContainText("WeddingWire");
+});
+
+test("site renders ultra luxury global touches", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(page.getByTestId("luxury-ribbon")).toContainText("Limited 2027 editorial calendar now open");
+  await expect(page.getByTestId("concierge-fab")).toContainText("Private concierge");
+});
+
+test("pricing route includes editorial motif panel", async ({ page }) => {
+  await page.goto("/pricing");
+
+  const motif = page.getByTestId("editorial-motif");
+  await expect(motif).toContainText("Investment Philosophy");
+  await expect(motif).toContainText("Flexible scopes. Non-negotiable standards.");
+});

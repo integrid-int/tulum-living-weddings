@@ -1,5 +1,6 @@
 import { cache } from "react";
 import type { Metadata } from "next";
+import EditorialMotifPanel from "@/src/components/sections/EditorialMotifPanel";
 import Hero from "@/src/components/sections/Hero";
 import TestimonialsGrid from "@/src/components/sections/TestimonialsGrid";
 import { fetchSanitySafe } from "@/sanity/lib/client";
@@ -25,7 +26,7 @@ const FALLBACK_CONTENT = {
   eyebrow: "Testimonials",
   title: "Testimonials",
   description:
-    "Hear from couples and families who trusted our team to coordinate unforgettable destination weddings in Tulum."
+    "Read reflections from couples and families who entrusted us with deeply personal, impeccably produced destination celebrations."
 };
 
 const getTestimonialsData = cache(async () => {
@@ -67,9 +68,16 @@ export default async function TestimonialsPage() {
     <main>
       <Hero
         eyebrow={FALLBACK_CONTENT.eyebrow}
+        kicker="The most meaningful metric is how your people felt in the room."
         title={resolveMarketingCopy(page?.title, FALLBACK_CONTENT.title)}
         description={resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
         backgroundImageUrl={BRAND_IMAGE_SOURCES.testimonialsHero}
+      />
+      <EditorialMotifPanel
+        label="Client Narratives"
+        headline="Trust is built before the wedding day and remembered long after."
+        detail="These stories reflect how intentional planning and refined production translate into genuine guest impact."
+        tags={["Client Experience", "International Couples", "Weekend Memories"]}
       />
       <TestimonialsGrid testimonials={mappedTestimonials.length > 0 ? mappedTestimonials : undefined} />
     </main>

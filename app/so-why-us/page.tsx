@@ -1,5 +1,6 @@
 import { cache } from "react";
 import type { Metadata } from "next";
+import EditorialMotifPanel from "@/src/components/sections/EditorialMotifPanel";
 import FaqAccordion from "@/src/components/sections/FaqAccordion";
 import Hero from "@/src/components/sections/Hero";
 import TestimonialsGrid from "@/src/components/sections/TestimonialsGrid";
@@ -36,8 +37,8 @@ const FALLBACK_CONTENT = {
   eyebrow: "So, Why Us?",
   title: "So- why us?",
   description:
-    "We focus on communication, budget transparency, and trusted local relationships so planning stays clear, calm, and joyful.",
-  ctaLabel: "Read testimonials",
+    "We pair creative taste with operational precision, so your planning experience stays clear, calm, and beautifully controlled.",
+  ctaLabel: "See client stories",
   ctaHref: "/testimonials"
 };
 
@@ -99,17 +100,24 @@ export default async function SoWhyUsPage() {
     <main>
       <Hero
         eyebrow={FALLBACK_CONTENT.eyebrow}
+        kicker="A calm, high-touch process for high-stakes wedding weekends."
         title={resolveMarketingCopy(page?.title, FALLBACK_CONTENT.title)}
         description={resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
         ctaLabel={page?.primaryCta?.label?.trim() || FALLBACK_CONTENT.ctaLabel}
         ctaHref={page?.primaryCta?.href?.trim() || FALLBACK_CONTENT.ctaHref}
         backgroundImageUrl={BRAND_IMAGE_SOURCES.whyUsHero}
       />
+      <EditorialMotifPanel
+        label="Our Signature"
+        headline="Calm communication. Exacting execution. Elevated guest memory."
+        detail="We prioritize transparent decisions, proactive vendor leadership, and polished event flow at every stage."
+        tags={["Transparent Planning", "Luxury Logistics", "Execution Excellence"]}
+      />
       <TestimonialsGrid
-        heading="Proof from recent celebrations"
+        heading="Proof in real celebrations"
         testimonials={testimonialCards.length > 0 ? testimonialCards : undefined}
       />
-      <FaqAccordion heading="How we work" items={renderedFaqItems} />
+      <FaqAccordion heading="How we lead the process" items={renderedFaqItems} />
     </main>
   );
 }

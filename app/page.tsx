@@ -1,8 +1,12 @@
 import { cache } from "react";
 import type { Metadata } from "next";
+import AsSeenInStrip from "@/src/components/sections/AsSeenInStrip";
+import EditorialMotifPanel from "@/src/components/sections/EditorialMotifPanel";
 import FeatureGrid from "@/src/components/sections/FeatureGrid";
 import Hero from "@/src/components/sections/Hero";
+import PlanningProcess from "@/src/components/sections/PlanningProcess";
 import TestimonialsGrid from "@/src/components/sections/TestimonialsGrid";
+import TrustSignals from "@/src/components/sections/TrustSignals";
 import { fetchSanitySafe } from "@/sanity/lib/client";
 import {
   PAGE_HOME_QUERY,
@@ -37,8 +41,8 @@ const FALLBACK_CONTENT = {
   eyebrow: "Tulum Living Weddings",
   title: "Welcome to Tulum Living Weddings and Events!",
   description:
-    "Congratulations on your engagement. We have been planning destination weddings in Tulum since 2009, from beach celebrations to cenote and jungle events.",
-  ctaLabel: "Start planning your wedding",
+    "Congratulations on your engagement. Since 2009, we have curated destination weddings in Tulum with a couture balance of beauty, logistics, and hospitality.",
+  ctaLabel: "Begin private planning",
   ctaHref: "/contact"
 };
 
@@ -91,18 +95,37 @@ export default async function HomePage() {
     <main>
       <Hero
         eyebrow={FALLBACK_CONTENT.eyebrow}
+        kicker="Where Riviera Maya elegance meets effortless execution."
         title={resolveMarketingCopy(page?.heroTitle, FALLBACK_CONTENT.title)}
         description={resolveMarketingCopy(page?.heroSubtitle, FALLBACK_CONTENT.description)}
         ctaLabel={page?.primaryCta?.label?.trim() || FALLBACK_CONTENT.ctaLabel}
         ctaHref={page?.primaryCta?.href?.trim() || FALLBACK_CONTENT.ctaHref}
+        secondaryCtaLabel="Explore galleries"
+        secondaryCtaHref="/gallery"
         backgroundImageUrl={
           (page?.heroImage ? buildSanityImageUrl(page.heroImage, { width: 1800, height: 1100, fit: "crop" }) : null) ??
           BRAND_IMAGE_SOURCES.homeHero
         }
       />
-      <FeatureGrid heading="Popular planning packages" features={featureItems.length > 0 ? featureItems : undefined} />
+      <TrustSignals
+        signals={[
+          { value: "300+", label: "celebrations curated" },
+          { value: "15+", label: "years of Riviera Maya expertise" },
+          { value: "40+", label: "exclusive venues and trusted partners" },
+          { value: "4.9/5", label: "average couple satisfaction" }
+        ]}
+      />
+      <AsSeenInStrip />
+      <EditorialMotifPanel
+        label="Editorial Signature"
+        headline="Destination weddings designed with modern restraint and unforgettable atmosphere."
+        detail="Our design direction blends Riviera Maya texture, luxury hospitality precision, and deeply personal storytelling."
+        tags={["Creative Direction", "Guest Choreography", "Timeless Styling"]}
+      />
+      <FeatureGrid heading="Couture planning signatures" features={featureItems.length > 0 ? featureItems : undefined} />
+      <PlanningProcess />
       <TestimonialsGrid
-        heading="Stories from recent celebrations"
+        heading="Words from recent celebrations"
         testimonials={testimonialItems.length > 0 ? testimonialItems : undefined}
       />
     </main>

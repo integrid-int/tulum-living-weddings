@@ -1,5 +1,6 @@
 import { cache } from "react";
 import type { Metadata } from "next";
+import EditorialMotifPanel from "@/src/components/sections/EditorialMotifPanel";
 import Hero from "@/src/components/sections/Hero";
 import PricingCards from "@/src/components/sections/PricingCards";
 import JsonLd from "@/src/components/seo/JsonLd";
@@ -30,8 +31,8 @@ const FALLBACK_CONTENT = {
   eyebrow: "Pricing",
   title: "Planning packages",
   description:
-    "Flexible planning packages tailored to your wedding scope, from advisory support to full-service coordination and event-week execution.",
-  ctaLabel: "Book a planning consultation",
+    "Flexible investment structures tailored to your celebration scope, from strategic advisory to full weekend production leadership.",
+  ctaLabel: "Request private proposal",
   ctaHref: "/contact"
 };
 
@@ -99,11 +100,18 @@ export default async function PricingPage() {
       <JsonLd data={pricingJsonLd} />
       <Hero
         eyebrow={FALLBACK_CONTENT.eyebrow}
+        kicker="Investment options designed around scope, style, and execution standard."
         title={resolveMarketingCopy(page?.title, FALLBACK_CONTENT.title)}
         description={resolveMarketingCopy(page?.intro, FALLBACK_CONTENT.description)}
         ctaLabel={page?.primaryCta?.label?.trim() || FALLBACK_CONTENT.ctaLabel}
         ctaHref={page?.primaryCta?.href?.trim() || FALLBACK_CONTENT.ctaHref}
         backgroundImageUrl={BRAND_IMAGE_SOURCES.pricingHero}
+      />
+      <EditorialMotifPanel
+        label="Investment Philosophy"
+        headline="Flexible scopes. Non-negotiable standards."
+        detail="Every package protects creative quality, operational precision, and the guest experience your celebration deserves."
+        tags={["Transparent Scope", "Luxury Standards", "Execution Control"]}
       />
       <PricingCards tiers={renderedTiers} />
     </main>

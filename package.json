@@ -10,7 +10,8 @@
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
     "seed:original": "node scripts/seed-original-site-content.mjs --apply",
-    "seed:original:dry-run": "node scripts/seed-original-site-content.mjs --dry-run"
+    "seed:original:dry-run": "node scripts/seed-original-site-content.mjs --dry-run",
+    "import:google-business:dry-run": "node scripts/import-google-business.mjs --help"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
