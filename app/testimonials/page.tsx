@@ -26,7 +26,7 @@ const FALLBACK_CONTENT = {
   eyebrow: "Testimonials",
   title: "Testimonials",
   description:
-    "Hear from couples and families who trusted our team to coordinate unforgettable destination weddings in Tulum."
+    "Read reflections from couples and families who entrusted us with deeply personal, impeccably produced destination celebrations."
 };
 
 const getTestimonialsData = cache(async () => {

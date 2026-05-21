@@ -37,8 +37,8 @@ const FALLBACK_CONTENT = {
   eyebrow: "So, Why Us?",
   title: "So- why us?",
   description:
-    "We focus on communication, budget transparency, and trusted local relationships so planning stays clear, calm, and joyful.",
-  ctaLabel: "Read testimonials",
+    "We pair creative taste with operational precision, so your planning experience stays clear, calm, and beautifully controlled.",
+  ctaLabel: "See client stories",
   ctaHref: "/testimonials"
 };
 
@@ -114,10 +114,10 @@ export default async function SoWhyUsPage() {
         tags={["Transparent Planning", "Luxury Logistics", "Execution Excellence"]}
       />
       <TestimonialsGrid
-        heading="Proof from recent celebrations"
+        heading="Proof in real celebrations"
         testimonials={testimonialCards.length > 0 ? testimonialCards : undefined}
       />
-      <FaqAccordion heading="How we work" items={renderedFaqItems} />
+      <FaqAccordion heading="How we lead the process" items={renderedFaqItems} />
     </main>
   );
 }

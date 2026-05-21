@@ -35,7 +35,7 @@ test("home page renders premium trust signals", async ({ page }) => {
   await page.goto("/");
 
   const trustSignals = page.getByTestId("trust-signals");
-  await expect(trustSignals).toContainText("Trusted by destination couples worldwide");
+  await expect(trustSignals).toContainText("Chosen by destination couples with high standards");
   await expect(trustSignals).toContainText("300+");
   await expect(trustSignals).toContainText("celebrations curated");
   await expect(trustSignals).toContainText("15+");
@@ -46,7 +46,7 @@ test("home page renders editorial as-seen-in strip", async ({ page }) => {
   await page.goto("/");
 
   const asSeenIn = page.getByTestId("as-seen-in");
-  await expect(asSeenIn).toContainText("Featured in and trusted by");
+  await expect(asSeenIn).toContainText("As seen in and trusted by");
   await expect(asSeenIn).toContainText("Wedding Chicks");
   await expect(asSeenIn).toContainText("WeddingWire");
 });
@@ -54,8 +54,8 @@ test("home page renders editorial as-seen-in strip", async ({ page }) => {
 test("site renders ultra luxury global touches", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.getByTestId("luxury-ribbon")).toContainText("Limited 2027 luxury dates now open");
-  await expect(page.getByTestId("concierge-fab")).toContainText("Plan with concierge");
+  await expect(page.getByTestId("luxury-ribbon")).toContainText("Limited 2027 editorial calendar now open");
+  await expect(page.getByTestId("concierge-fab")).toContainText("Private concierge");
 });
 
 test("pricing route includes editorial motif panel", async ({ page }) => {

@@ -26,7 +26,7 @@ const FALLBACK_CONTENT = {
   eyebrow: "Gallery",
   title: "Gallery of inspiration",
   description:
-    "Explore inspiration across venues and ceremonies, flowers and decor, entertainment, captured moments, and food and beverage."
+    "Explore a curated visual library of ceremonies, styling, entertainment, and atmosphere across Riviera Maya celebrations."
 };
 
 const getGalleryData = cache(async () => {

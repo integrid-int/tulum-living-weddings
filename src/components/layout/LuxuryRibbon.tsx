@@ -23,7 +23,7 @@ export default function LuxuryRibbon() {
         }}
       >
         <p style={{ margin: 0, color: "var(--brand-cream)", fontWeight: 700, fontSize: "0.86rem", letterSpacing: "0.03em" }}>
-          Limited 2027 luxury dates now open
+          Limited 2027 editorial calendar now open
         </p>
         <Link
           href="/contact"
@@ -38,7 +38,7 @@ export default function LuxuryRibbon() {
             fontSize: "0.8rem"
           }}
         >
-          Reserve your consultation
+          Reserve your date
         </Link>
       </div>
     </div>

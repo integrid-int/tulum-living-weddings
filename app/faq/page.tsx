@@ -24,7 +24,7 @@ const FALLBACK_CONTENT = {
   eyebrow: "FAQ",
   title: "Frequently asked questions",
   description:
-    "Answers to common planning questions for destination weddings in Tulum, from timelines and legal requirements to guest logistics."
+    "Direct answers to high-impact planning questions, from legal requirements and timelines to guest logistics and production flow."
 };
 
 const FALLBACK_FAQ_ITEMS = [

@@ -27,8 +27,8 @@ const FALLBACK_CONTENT = {
   eyebrow: "How We Can Help",
   title: "How we can help",
   description:
-    "From flowers and decor to entertainment and logistics, we coordinate trusted local experts to bring your destination wedding vision to life.",
-  ctaLabel: "Contact us",
+    "From design language and floral architecture to production logistics, we coordinate every specialist required for an elevated destination weekend.",
+  ctaLabel: "Request service guide",
   ctaHref: "/contact"
 };
 
@@ -84,9 +84,9 @@ export default async function HowWeCanHelpPage() {
         detail="From creative partners to logistics choreography, we structure your planning journey with premium clarity."
         tags={["Venue Intelligence", "Design Language", "Guest Concierge"]}
       />
-      <FeatureGrid heading="Support tracks" features={supportTracks.length > 0 ? supportTracks : undefined} />
+      <FeatureGrid heading="Curated service tracks" features={supportTracks.length > 0 ? supportTracks : undefined} />
       <PricingCards
-        heading="Packages aligned to support level"
+        heading="Investment tiers by planning depth"
         tiers={packageCards.length > 0 ? packageCards : undefined}
       />
     </main>

@@ -13,13 +13,13 @@ type SiteHeaderProps = {
 
 const defaultLinks: NavLink[] = [
   { href: "/", label: "Home" },
-  { href: "/how-we-can-help", label: "How We Can Help" },
-  { href: "/so-why-us", label: "Why Us" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/how-we-can-help", label: "Services" },
+  { href: "/so-why-us", label: "Why Tulum Living" },
+  { href: "/gallery", label: "Inspiration" },
   { href: "/testimonials", label: "Testimonials" },
   { href: "/faq", label: "FAQ" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/contact", label: "Contact" }
+  { href: "/contact", label: "Inquire" }
 ];
 
 export default function SiteHeader({
@@ -99,7 +99,7 @@ export default function SiteHeader({
             transition: "transform 180ms ease, box-shadow 180ms ease"
           }}
         >
-          Book consultation
+          Reserve private consult
         </Link>
       </nav>
     </header>

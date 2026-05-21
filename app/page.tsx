@@ -41,8 +41,8 @@ const FALLBACK_CONTENT = {
   eyebrow: "Tulum Living Weddings",
   title: "Welcome to Tulum Living Weddings and Events!",
   description:
-    "Congratulations on your engagement. We have been planning destination weddings in Tulum since 2009, from beach celebrations to cenote and jungle events.",
-  ctaLabel: "Start planning your wedding",
+    "Congratulations on your engagement. Since 2009, we have curated destination weddings in Tulum with a couture balance of beauty, logistics, and hospitality.",
+  ctaLabel: "Begin private planning",
   ctaHref: "/contact"
 };
 
@@ -122,10 +122,10 @@ export default async function HomePage() {
         detail="Our design direction blends Riviera Maya texture, luxury hospitality precision, and deeply personal storytelling."
         tags={["Creative Direction", "Guest Choreography", "Timeless Styling"]}
       />
-      <FeatureGrid heading="Signature planning experiences" features={featureItems.length > 0 ? featureItems : undefined} />
+      <FeatureGrid heading="Couture planning signatures" features={featureItems.length > 0 ? featureItems : undefined} />
       <PlanningProcess />
       <TestimonialsGrid
-        heading="Stories from recent celebrations"
+        heading="Words from recent celebrations"
         testimonials={testimonialItems.length > 0 ? testimonialItems : undefined}
       />
     </main>

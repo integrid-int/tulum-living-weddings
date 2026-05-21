@@ -10,25 +10,25 @@ type PlanningProcessProps = {
 
 const defaultSteps: ProcessStep[] = [
   {
-    title: "1. Discovery & Vision",
-    detail: "We align on style, guest experience goals, budget range, and the atmosphere you want guests to feel."
+    title: "1. Vision Atelier",
+    detail: "We define your aesthetic, guest journey, and investment priorities with complete strategic clarity."
   },
   {
-    title: "2. Venue & Design Direction",
-    detail: "You receive curated venue options, refined design concepts, and trusted vendor recommendations."
+    title: "2. Venue & Art Direction",
+    detail: "You receive handpicked venues, a refined creative language, and premium partner recommendations."
   },
   {
-    title: "3. Precision Planning",
-    detail: "Contracts, logistics, and production timelines are handled with clear updates and calm communication."
+    title: "3. Precision Production",
+    detail: "Contracts, logistics, and timeline architecture are managed with proactive communication and elegant control."
   },
   {
-    title: "4. Wedding Weekend Execution",
-    detail: "Our team runs the event flow on-site so you can focus on celebrating with your people."
+    title: "4. Weekend Orchestration",
+    detail: "Our on-site team leads every transition so you can stay fully present with your guests and partner."
   }
 ];
 
 export default function PlanningProcess({
-  heading = "A seamless four-step planning journey",
+  heading = "Your private planning atelier in four movements",
   steps = defaultSteps
 }: PlanningProcessProps) {
   return (

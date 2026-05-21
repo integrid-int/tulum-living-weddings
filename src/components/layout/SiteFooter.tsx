@@ -28,7 +28,7 @@ export default function SiteFooter({ companyName = "Tulum Living Weddings" }: Si
       </p>
       <p style={{ margin: 0 }}>
         <Link href="/contact" style={{ color: "var(--brand-accent)", fontWeight: 700 }}>
-          Start planning your wedding
+          Begin your couture planning
         </Link>
       </p>
     </footer>

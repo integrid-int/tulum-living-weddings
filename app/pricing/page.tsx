@@ -31,8 +31,8 @@ const FALLBACK_CONTENT = {
   eyebrow: "Pricing",
   title: "Planning packages",
   description:
-    "Flexible planning packages tailored to your wedding scope, from advisory support to full-service coordination and event-week execution.",
-  ctaLabel: "Book a planning consultation",
+    "Flexible investment structures tailored to your celebration scope, from strategic advisory to full weekend production leadership.",
+  ctaLabel: "Request private proposal",
   ctaHref: "/contact"
 };
 

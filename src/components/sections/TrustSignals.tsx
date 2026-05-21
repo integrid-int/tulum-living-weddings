@@ -16,7 +16,7 @@ const defaultSignals: TrustSignal[] = [
 ];
 
 export default function TrustSignals({
-  heading = "Trusted by destination couples worldwide",
+  heading = "Chosen by destination couples with high standards",
   signals = defaultSignals
 }: TrustSignalsProps) {
   return (

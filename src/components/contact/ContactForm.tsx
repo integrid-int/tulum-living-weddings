@@ -117,14 +117,14 @@ export default function ContactForm({ submitButtonLabel, successMessage }: Conta
       </label>
 
       <label style={{ display: "grid", gap: "0.25rem" }}>
-        <span>Estimated budget range</span>
+        <span>Investment comfort range</span>
         <input name="budgetRange" type="text" style={baseInputStyles} />
       </label>
 
       <label style={{ display: "grid", gap: "0.25rem" }}>
         <span>Event type</span>
         <select name="eventType" defaultValue="" style={baseInputStyles}>
-          <option value="">Select an event type</option>
+          <option value="">Select celebration style</option>
           <option value="wedding">Wedding</option>
           <option value="engagement">Engagement</option>
           <option value="elopement">Elopement</option>

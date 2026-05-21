@@ -13,7 +13,7 @@ const defaultPublications = [
 ];
 
 export default function AsSeenInStrip({
-  heading = "Featured in and trusted by",
+  heading = "As seen in and trusted by",
   publications = defaultPublications
 }: AsSeenInStripProps) {
   return (

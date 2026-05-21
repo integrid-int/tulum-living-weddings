@@ -22,12 +22,12 @@ const FALLBACK_CONTENT = {
   eyebrow: "Contact",
   title: "Contact us",
   description:
-    "Tell us about your event and we will guide your next steps. The best way to reach us is by email and we respond promptly.",
+    "Share your celebration vision and we will map your next best steps with concierge-level guidance.",
   email: "TulumLiving@gmail.com",
   phone: "+529841230456",
   phoneDisplay: "+52 (984) 123-0456",
-  submitButtonLabel: "Submit inquiry",
-  successMessage: "Thanks for reaching out. Our planning team will contact you shortly."
+  submitButtonLabel: "Send private inquiry",
+  successMessage: "Thank you. Our planning atelier will respond with tailored next steps shortly."
 };
 
 function sanitizePhoneForTel(phone: string | null | undefined): string | null {
@@ -133,9 +133,9 @@ export default async function ContactPage() {
               boxShadow: "0 10px 24px rgba(95, 74, 66, 0.08)"
             }}
           >
-            <h2 style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>Send us your wedding plans</h2>
+            <h2 style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>Share your wedding vision</h2>
             <p style={{ margin: "0.5rem 0 1rem", color: "var(--brand-cocoa)" }}>
-              Tell us your date, guest count, and vision. We typically respond within 24 hours.
+              Tell us your dates, guest profile, and style direction. We typically respond within 24 hours.
             </p>
             <ContactForm
               submitButtonLabel={page?.submitButtonLabel?.trim() || FALLBACK_CONTENT.submitButtonLabel}
@@ -155,7 +155,7 @@ export default async function ContactPage() {
               alignContent: "start"
             }}
           >
-            <h2 style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>Your concierge planning flow</h2>
+            <h2 style={{ margin: 0, color: "var(--brand-deep-cocoa)" }}>Your couture planning flow</h2>
             <ol style={{ margin: 0, paddingLeft: "1.2rem", color: "var(--brand-cocoa)", display: "grid", gap: "0.5rem" }}>
               <li>Discovery call to align vision and budget.</li>
               <li>Curated venues and design direction.</li>

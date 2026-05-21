@@ -21,7 +21,7 @@ export default function ConciergeFab() {
         boxShadow: "0 14px 26px rgba(var(--brand-ink-rgb), 0.34)"
       }}
     >
-      Plan with concierge
+      Private concierge
     </Link>
   );
 }
